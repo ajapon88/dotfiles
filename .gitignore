@@ -1,0 +1,18 @@
+# this is igore files for git
+
+.vim/bundle
+
+## GTAGS
+GPATH
+GRTAGS
+GTAGS
+
+## vim backup file
+*~
+
+## object file
+*.o
+
+.vim/tmp/*
+!.gitkeep
+
