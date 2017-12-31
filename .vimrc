@@ -43,6 +43,12 @@ call dein#add('tpope/vim-endwise')
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell')
 
+"Syntax
+call dein#add('vim-syntastic/syntastic')
+
+"ruby
+call dein#add('ngmy/vim-rubocop')
+
 " Erlang
 call dein#add('vim-erlang/vim-erlang-omnicomplete')
 call dein#add('vim-erlang/vim-erlang-compiler')
@@ -118,12 +124,23 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
 " --------------------------------
-" rubocop
+" syntastic
 " --------------------------------
 " syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
 " active_filetypesに、保存時にsyntasticを走らせるファイルタイプを指定する
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+
 let g:syntastic_ruby_checkers = ['rubocop']
 
 " --------------------------------
@@ -210,4 +227,11 @@ set autochdir
 
 " filetype プラグインによる indent を on にする
 filetype plugin indent on
+" ESCでかなモードをオフにする
+inoremap <Esc> <Esc>:set iminsert=0<CR>
+" 挿入モード時の移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
