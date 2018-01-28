@@ -10,6 +10,7 @@ GIT_PS1_SHOWDIRTYSTATE=true
 export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\\$ '
 
 export PATH=$PATH:${HOME}/bin
+export PATH=$PATH:/Applications/Unity/Unity.app/Contents/MacOS
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
