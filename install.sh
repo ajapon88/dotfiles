@@ -17,6 +17,8 @@ ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
 ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
 ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
 
+[ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
+
 [ ! -e "${HOME}/bin" ] && mkdir "${HOME}/bin"
 [ ! -e "${HOME}/bin/opt" ] && mkdir "${HOME}/bin/opt"
 
