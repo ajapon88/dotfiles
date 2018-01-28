@@ -13,3 +13,5 @@ eval "$(rbenv init -)"
 
 alias bi='bundle install --path ./vendor/bundle'
 alias be='bundle exec'
+
+[ -e ~/.bashrc.local ] && source ~/.bashrc.local
