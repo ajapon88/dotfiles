@@ -1,0 +1,13 @@
+#!/bin/bash
+
+name=${1}
+email=${2}
+
+if [ -z "${name}" -o -z "${email}" ]; then
+  echo "usage: $(basename ${0}) [user.name] [user.email]"
+  exit 1
+fi
+
+git config --local user.name "${name}"
+git config --local user.email "${email}"
+git remote set-url origin $(git config --get remote.origin.url | sed -e "s/^\(.*:\/\/\).*@/\1/g" | sed -e "s/\(.*:\/\/\)/\1${name}@/g")

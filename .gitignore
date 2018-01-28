@@ -16,3 +16,4 @@ GTAGS
 .vim/tmp/*
 !.gitkeep
 
+.vim/.vim
