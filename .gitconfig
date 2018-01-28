@@ -5,6 +5,7 @@
 [core]
   precomposeunicode = true
   quotepath = false
+	excludesfile = ~/.gitignore_global
 [alias]
   alias = "!f(){ git config --get-regexp alias|cut -d'.' -f2|if [ -z $1 ];then cut -d' ' -f1|column; else grep $1' '; fi }; f"
   showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...HEAD | grep 'Merge pull request #' | head -n 1; }; f"
@@ -18,7 +19,16 @@
   no-assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --no-assume-unchanged; }; f"
   change-autocrlf = "!f(){ git config --local core.autocrlf "\"${1}\""; find "$(pwd)/$(git rev-parse --show-cdup)" -print0 | xargs -0 touch; }; f"
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-
+  fell = !"git fetch -p && git pull"
 [user]
 	name = ajapon88
 	email = ajapon88@gmail.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[mergetool "unityyamlmerge"]
+  trustExitCode = false
+  cmd = "/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge" merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
