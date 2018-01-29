@@ -1,0 +1,13 @@
+[credential]
+    helper = osxkeychain
+[alias]
+    esclocal = "!f() { echo $(git symbolic-ref --short HEAD | nkf -WwMQ | tr = %); }; f"
+    propen = "!f() { open \"$(git repo)/pull/$(git esclocal)\"; }; f"
+    bropen = "!f() { open \"$(git repo)/tree/$(git esclocal)\"; }; f"
+    repoopen = "!f() { open \"$(git repo)\"; }; f"
+[mergetool "sourcetree"]
+	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[mergetool "unityyamlmerge"]
+	trustExitCode = false
+	cmd = "/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge" merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"

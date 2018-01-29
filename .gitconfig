@@ -1,5 +1,3 @@
-[credential]
-    helper = osxkeychain
 [http]
 	postBuffer = 524288000
 [core]
@@ -15,11 +13,7 @@
     alias = "!f(){ git config --get-regexp alias|cut -d'.' -f2|if [ -z $1 ];then cut -d' ' -f1|column; else grep $1' '; fi }; f"
     showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...HEAD | grep 'Merge pull request #' | head -n 1; }; f"
     repo = "!f() { git config --get remote.origin.url | sed -e \"s/^.*[:\\/]\\(.*\\/.*\\).git$/https:\\/\\/github.com\\/\\1/\"; }; f"
-    esclocal = "!f() { echo $(git symbolic-ref --short HEAD | nkf -WwMQ | tr = %); }; f"
     local = symbolic-ref --short HEAD
-    propen = "!f() { open \"$(git repo)/pull/$(git esclocal)\"; }; f"
-    bropen = "!f() { open \"$(git repo)/tree/$(git esclocal)\"; }; f"
-    repoopen = "!f() { open \"$(git repo)\"; }; f"
     assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --assume-unchanged; }; f"
     no-assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --no-assume-unchanged; }; f"
     change-autocrlf = "!f(){ git config --local core.autocrlf "\"${1}\""; find "$(pwd)/$(git rev-parse --show-cdup)" -print0 | xargs -0 touch; }; f"
@@ -28,16 +22,11 @@
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
-[mergetool "sourcetree"]
-	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[mergetool "unityyamlmerge"]
-	trustExitCode = false
-	cmd = "/Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge" merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 [include]
+    path = .gitconfig.os
     path = .gitconfig.local
