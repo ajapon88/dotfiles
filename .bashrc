@@ -19,4 +19,8 @@ eval "$(rbenv init -)"
 alias bi='bundle install --path ./vendor/bundle'
 alias be='bundle exec'
 
+if [ "$(uname)" == 'Darwin' ]; then
+  alias dns-clean='sudo killall -HUP mDNSResponder'
+fi
+
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
