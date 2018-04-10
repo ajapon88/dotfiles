@@ -18,6 +18,7 @@ eval "$(rbenv init -)"
 alias reload='source ~/.bashrc'
 alias relogin='exec $SHELL -l'
 alias bi='bundle install --path ./vendor/bundle'
+alias bu='bundle update'
 alias be='bundle exec'
 
 if [ "$(uname)" == 'Darwin' ]; then
