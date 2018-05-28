@@ -23,6 +23,9 @@ alias be='bundle exec'
 
 if [ "$(uname)" == 'Darwin' ]; then
   alias dns-clean='sudo killall -HUP mDNSResponder'
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+      . `brew --prefix`/etc/bash_completion
+  fi
 fi
 
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
