@@ -1,0 +1,30 @@
+homebrew_taps:
+  - homebrew/cask
+  - homebrew/cask-versions
+homebrew_cask_packages:
+  - name: java8
+  - name: macdown
+  - name: docker
+  - name: sourcetree
+homebrew_packages:
+  - name: ansible
+  - name: git
+  - name: git-lfs
+  - name: bash-completion
+  - name: rbenv
+  - name: ruby-build
+  - name: vim
+  - name: macvim
+  - name: pacvim
+  - name: jq
+  - name: mono
+  - name: tree
+  - name: sl
+  - name: nkf
+  - name: docker
+  - name: screen
+  - name: groovy
+  - name: imagemagick
+  - name: wget
+  - name: pwgen
+  - name: sqlite

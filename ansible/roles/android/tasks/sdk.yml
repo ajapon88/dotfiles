@@ -1,0 +1,26 @@
+- name: check installed android sdk
+  stat: 
+    path: '{{ android.install_dir }}/android-sdk/tools'
+  register: installed_android_sdk
+- name: create android sdk dir
+  file:
+    path: '{{ android.install_dir }}/android-sdk'
+    state: directory
+- name: download android sdk
+  get_url:
+    url: '{{ android.base_url }}/{{ android.sdk.filename }}'
+    sha256sum: '{{ android.sdk.sha256 }}'
+    dest: '/tmp/{{ android.sdk.filename }}'
+  when: not installed_android_sdk.stat.exists
+- name: unarchive android sdk
+  unarchive:
+    src: '/tmp/{{ android.sdk.filename }}'
+    dest: '{{ android.install_dir }}/android-sdk/'
+  when: not installed_android_sdk.stat.exists
+#- name: update android sdk
+#  expect:
+#    command: ./sdkmanager --update
+#    chdir: '{{ android.install_dir }}/android-sdk/tools/bin/'
+#    responses:
+#      "^Accept? (y/N): .*": "y"
+#  when: False

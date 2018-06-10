@@ -11,10 +11,6 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 
 export PATH=$PATH:${HOME}/bin
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 alias reload='source ~/.bashrc'
 alias relogin='exec $SHELL -l'
 alias bi='bundle install --path ./vendor/bundle'

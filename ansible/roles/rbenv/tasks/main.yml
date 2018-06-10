@@ -1,0 +1,32 @@
+- name: add rbenv init
+  blockinfile:
+    dest: ~/.bash_profile
+    block: |
+      # rbenv
+      export PATH=${HOME}/.rbenv/bin:${PATH}
+      eval "$(rbenv init -)"
+    create: yes
+- name: reload .bash_profile
+  shell: source ~/.bash_profile
+  changed_when: false
+- name: check installed ruby versions
+  shell: 'rbenv versions'
+  register: installed_ruby_versions
+  changed_when: false
+- name: install ruby {{ ruby_version }}
+  shell: 'rbenv install {{ ruby_version }} && rbenv rehash'
+  when: ruby_version not in installed_ruby_versions.stdout
+- name: check rbenv global
+  shell: rbenv global
+  register: rbenv_global
+  changed_when: false
+- name: rbenv global {{ ruby_version }}
+  shell: rbenv global {{ ruby_version }}
+  when: ruby_version not in rbenv_global.stdout
+- name: check installed gems
+  shell: 'gem list --local'
+  register: installed_gems
+  changed_when: false
+- name: install bundler
+  shell: gem install bundler
+  when: '"bundler" not in installed_gems.stdout'
