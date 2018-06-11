@@ -1,3 +1,8 @@
+- name: install rbenv
+  homebrew:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") }}'
+  with_items: '{{ homebrew_packages }}'
 - name: add rbenv init
   blockinfile:
     dest: ~/.bash_profile
