@@ -6,6 +6,8 @@ homebrew_cask_packages:
   - name: macdown
   - name: docker
   - name: sourcetree
+  - name: virtualbox
+  - name: vagrant
 homebrew_packages:
   - name: ansible
   - name: git
