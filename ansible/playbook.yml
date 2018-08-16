@@ -1,6 +1,11 @@
 - hosts: localhost
   connection: local
+  vars:
+    - ansible_python_interpreter: /usr/local/bin/python
   roles:
+    - pip
+    - bash
     - homebrew
+    - git
     - rbenv
-    # - android
+    - android

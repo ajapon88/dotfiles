@@ -1,0 +1,5 @@
+- include: install.yml
+- include: update.yml
+  when: android.sdk.update == true
+- include: package.yml
+  with_items: '{{ android.sdk.packages }}'

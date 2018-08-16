@@ -1,4 +1,4 @@
-homebrew_packages:
-  - name: rbenv
-  - name: ruby-build
-ruby_version: 2.4.3
+rbenv:
+  installs:
+    - 2.4.3
+  global: 2.4.3

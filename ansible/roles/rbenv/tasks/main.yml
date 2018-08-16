@@ -1,8 +1,3 @@
-- name: install rbenv
-  homebrew:
-    name: '{{ item.name }}'
-    state: '{{ item.state | default("present") }}'
-  with_items: '{{ homebrew_packages }}'
 - name: add rbenv init
   blockinfile:
     dest: ~/.bash_profile
@@ -10,6 +5,7 @@
       # rbenv
       export PATH=${HOME}/.rbenv/bin:${PATH}
       eval "$(rbenv init -)"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK rbenv"
     create: yes
 - name: reload .bash_profile
   shell: source ~/.bash_profile
@@ -18,16 +14,18 @@
   shell: 'rbenv versions'
   register: installed_ruby_versions
   changed_when: false
-- name: install ruby {{ ruby_version }}
-  shell: 'rbenv install {{ ruby_version }} && rbenv rehash'
-  when: ruby_version not in installed_ruby_versions.stdout
-- name: check rbenv global
-  shell: rbenv global
-  register: rbenv_global
+- name: install ruby
+  shell: 'rbenv install {{ item }}'
+  register: install
+  failed_when: install.rc != 1
+  changed_when: '"already exists" not in install.stderr'
+  with_items: '{{ rbenv.installs }}'
+- name: set rbenv global
+  include: global.yml version={{ rbenv.global }}
+  when: rbenv.global
+- name: rbenv rehash
+  shell: rbenv rehash
   changed_when: false
-- name: rbenv global {{ ruby_version }}
-  shell: rbenv global {{ ruby_version }}
-  when: ruby_version not in rbenv_global.stdout
 - name: check installed gems
   shell: 'gem list --local'
   register: installed_gems

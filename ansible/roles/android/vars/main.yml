@@ -1,10 +1,16 @@
 android:
-  install_dir: '{{ ansible_env.HOME }}/lib/android'
-  base_url: 'https://dl.google.com/android/repository'
-  ndk:
-    filename: 'android-ndk-r13b-darwin-x86_64.zip'
-    sha256: 'eba299f1cdd9059e635d159dbe71678cea9f00efb3ef9b56083c7a09dff665bf'
-    version: 'android-ndk-r13b'
+  dir: '{{ ansible_env.HOME }}/lib/android'
+  repository_url: 'https://dl.google.com/android/repository'
   sdk:
     filename: 'tools_r25.2.3-macosx.zip'
     sha256: '593544d4ca7ab162705d0032fb0c0c88e75bd0f42412d09a1e8daa3394681dc6'
+    update: false
+    packages:
+      - name: build-tools
+        version: 25.0.2
+      - name: platforms
+        version: android-26
+  ndk:
+    - filename: 'android-ndk-r13b-darwin-x86_64.zip'
+      sha256: 'eba299f1cdd9059e635d159dbe71678cea9f00efb3ef9b56083c7a09dff665bf'
+      version: 'android-ndk-r13b'

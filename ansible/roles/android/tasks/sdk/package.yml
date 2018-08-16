@@ -1,0 +1,9 @@
+- name: install sdk package {{ item.name }};{{ item.version }}
+  expect:
+    command: './sdkmanager --verbose "{{ item.name }};{{ item.version }}"'
+    chdir: '{{ android.dir }}/android-sdk/tools/bin/'
+    timeout: 300
+    responses:
+      "Accept\\? \\(y/N\\): .*": "y"
+  register: result
+  changed_when: '"Install" in result.stdout'
