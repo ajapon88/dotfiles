@@ -31,3 +31,7 @@ homebrew:
     - name: sqlite
     - name: rbenv
     - name: ruby-build
+    - name: gradle
+    - name: gradle-completion
+  completions:
+    - name: bash_completion

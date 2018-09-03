@@ -8,7 +8,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK rbenv"
     create: yes
 - name: reload .bash_profile
-  shell: source ~/.bash_profile
+  shell: source ~/.bash_profile executable=/bin/bash
   changed_when: false
 - name: check installed ruby versions
   shell: 'rbenv versions'

@@ -1,6 +1,6 @@
 - name: add homebrew cask opts
   lineinfile:
-    dest: ~/.bash_profile
+    dest: ~/.bashrc
     line: 'export HOMEBREW_CASK_OPTS="--appdir=/Applications"'
     create: yes
 - name: reload .bash_profile
@@ -26,3 +26,12 @@
     name: '{{ item.name }}'
     state: '{{ item.state | default("present") }}'
   with_items: '{{ homebrew.packages }}'
+- name: load completions
+  lineinfile:
+    dest: ~/.bashrc
+    line: 'source `brew --prefix`/etc/{{ item.name }}'
+    create: yes
+  with_items: '{{ homebrew.completions }}'
+- name: reload .bash_profile
+  shell: source ~/.bash_profile executable=/bin/bash
+  changed_when: false

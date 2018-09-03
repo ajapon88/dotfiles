@@ -4,5 +4,5 @@
   changed_when: '"Requirement already up-to-date" not in result.stdout'
 - name: install pips
   pip:
-    name: '{{ item.name}} '
-  with_items: '{{ pip }}'
+    name: '{{ item.name }} '
+  with_items: '{{ pips }}'
