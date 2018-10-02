@@ -9,10 +9,12 @@ homebrew:
     - name: sourcetree
     - name: virtualbox
     - name: vagrant
+    - name: visual-studio-code 
   packages:
     - name: ansible
     - name: git
     - name: git-lfs
+    - name: gibo
     - name: bash-completion
     - name: vim
     - name: macvim
@@ -33,5 +35,4 @@ homebrew:
     - name: ruby-build
     - name: gradle
     - name: gradle-completion
-  completions:
-    - name: bash_completion
+    - name: nuget

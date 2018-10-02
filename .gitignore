@@ -14,6 +14,7 @@ GTAGS
 *.o
 
 .vim/tmp/*
+.vim/.netrwhist
 !.gitkeep
 
 .vim/.vim

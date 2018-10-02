@@ -3,9 +3,6 @@
     dest: ~/.bashrc
     line: 'export HOMEBREW_CASK_OPTS="--appdir=/Applications"'
     create: yes
-- name: reload .bash_profile
-  shell: source ~/.bash_profile executable=/bin/bash
-  changed_when: false
 - name: hombrew update
   homebrew:
     update_homebrew: yes
@@ -26,12 +23,13 @@
     name: '{{ item.name }}'
     state: '{{ item.state | default("present") }}'
   with_items: '{{ homebrew.packages }}'
-- name: load completions
-  lineinfile:
+- name: add completions
+  blockinfile:
     dest: ~/.bashrc
-    line: 'source `brew --prefix`/etc/{{ item.name }}'
+    block: |
+      [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
+    marker: "# {mark} ANSIBLE MANAGED BLOCK completions"
     create: yes
-  with_items: '{{ homebrew.completions }}'
 - name: reload .bash_profile
   shell: source ~/.bash_profile executable=/bin/bash
   changed_when: false
