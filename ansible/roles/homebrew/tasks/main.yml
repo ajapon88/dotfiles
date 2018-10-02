@@ -30,6 +30,14 @@
       [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
     marker: "# {mark} ANSIBLE MANAGED BLOCK completions"
     create: yes
+- name: direnv
+  blockinfile:
+    dest: ~/.bashrc
+    block: |
+      export EDITOR=code
+      eval "$(direnv hook bash)"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK direnv"
+    create: yes
 - name: reload .bash_profile
   shell: source ~/.bash_profile executable=/bin/bash
   changed_when: false

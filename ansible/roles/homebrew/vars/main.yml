@@ -35,4 +35,5 @@ homebrew:
     - name: ruby-build
     - name: gradle
     - name: gradle-completion
+    - name: direnv
     - name: nuget

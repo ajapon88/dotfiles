@@ -26,3 +26,7 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 # END ANSIBLE MANAGED BLOCK git
 
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
+# BEGIN ANSIBLE MANAGED BLOCK direnv
+export EDITOR=code
+eval "$(direnv hook bash)"
+# END ANSIBLE MANAGED BLOCK direnv
