@@ -38,6 +38,14 @@
       eval "$(direnv hook bash)"
     marker: "# {mark} ANSIBLE MANAGED BLOCK direnv"
     create: yes
+- name: ghq
+  blockinfile:
+    dest: ~/.bashrc
+    block: |
+      alias g='cd $(ghq root)/$(ghq list | peco)'
+      alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK ghq"
+    create: yes
 - name: reload .bash_profile
   shell: source ~/.bash_profile executable=/bin/bash
   changed_when: false

@@ -15,6 +15,10 @@ homebrew:
     - name: git
     - name: git-lfs
     - name: gibo
+    - name: tig
+    - name: ghq
+    - name: peco
+    - name: hub
     - name: bash-completion
     - name: vim
     - name: macvim

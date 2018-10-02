@@ -30,3 +30,7 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 export EDITOR=code
 eval "$(direnv hook bash)"
 # END ANSIBLE MANAGED BLOCK direnv
+# BEGIN ANSIBLE MANAGED BLOCK ghq
+alias g='cd $(ghq root)/$(ghq list | peco)'
+alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+# END ANSIBLE MANAGED BLOCK ghq
