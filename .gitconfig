@@ -20,6 +20,7 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     authors = !"git log --pretty=format:%an | sort | uniq"
     commiters = !"git log --pretty=format:%cn | sort | uniq"
+    root = "!exec $SHELL ; :"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
