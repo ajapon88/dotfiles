@@ -11,12 +11,12 @@ do
   esac
 done
 
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.vimrc" "${HOME}/.vimrc"
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.vim" "${HOME}/.vim"
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
-ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.vimrc" "${HOME}/.vimrc"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.vim" "${HOME}/.vim"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
 
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
 
@@ -25,14 +25,14 @@ ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
 
 if [ -d "${DOTFILES_PATH}/bin" ]; then
   for file in `ls bin`; do
-    ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/bin/${file}" "${HOME}/bin/${file}"
+    ln -vis ${LN_FORCE} "${DOTFILES_PATH}/bin/${file}" "${HOME}/bin/${file}"
   done
 fi
 
 [ ! -e "${HOME}/.gitconfig.local" ] && cp "${DOTFILES_PATH}/.gitconfig.local" "${HOME}/.gitconfig.local"
 
 if [ "$(uname)" == 'Darwin' ]; then
-  ln -i -s ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
+  ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
 fi
 
 if [ "$(uname)" == 'Darwin' ]; then
