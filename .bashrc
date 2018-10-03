@@ -12,6 +12,9 @@ alias bu='bundle update'
 alias be='bundle exec'
 alias securerandom='ruby -r securerandom -e "puts SecureRandom.urlsafe_base64"'
 alias dns-clean='sudo killall -HUP mDNSResponder'
+alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
+alias rm-thumbs='find . -name "Thumbs.db" -print -exec rm -f {} \;'
+alias rm-empties='find . -mindepth 1 -type d -empty -delete -print'
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # BEGIN ANSIBLE MANAGED BLOCK completions
