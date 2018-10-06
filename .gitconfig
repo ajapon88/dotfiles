@@ -33,4 +33,4 @@
     path = .gitconfig.os
     path = .gitconfig.local
 [ghq]
-	root = ~/.ghq
+	root = ~/repos
