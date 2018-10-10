@@ -30,6 +30,7 @@ homebrew:
     - name: nkf
     - name: docker
     - name: screen
+    - name: tmux
     - name: groovy
     - name: imagemagick
     - name: wget

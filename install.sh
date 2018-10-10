@@ -17,6 +17,7 @@ ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
 ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
 ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
 ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
+ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.tmux.conf" "${HOME}/.tmux.conf"
 
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
 
