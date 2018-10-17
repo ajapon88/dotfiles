@@ -11,29 +11,28 @@ do
   esac
 done
 
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.vimrc" "${HOME}/.vimrc"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.vimrc" "${HOME}/.vimrc"
 ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.vim" "${HOME}/.vim"
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
-ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.tmux.conf" "${HOME}/.tmux.conf"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
+ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.tmux.conf" "${HOME}/.tmux.conf"
 
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
 
 [ ! -e "${HOME}/bin" ] && mkdir "${HOME}/bin"
-[ ! -e "${HOME}/bin/opt" ] && mkdir "${HOME}/bin/opt"
 
 if [ -d "${DOTFILES_PATH}/bin" ]; then
   for file in `ls bin`; do
-    ln -vis ${LN_FORCE} "${DOTFILES_PATH}/bin/${file}" "${HOME}/bin/${file}"
+    ln -visn ${LN_FORCE} "${DOTFILES_PATH}/bin/${file}" "${HOME}/bin/${file}"
   done
 fi
 
 [ ! -e "${HOME}/.gitconfig.local" ] && cp "${DOTFILES_PATH}/.gitconfig.local" "${HOME}/.gitconfig.local"
 
 if [ "$(uname)" == 'Darwin' ]; then
-  ln -vis ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
+  ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
 fi
 
 if [ "$(uname)" == 'Darwin' ]; then

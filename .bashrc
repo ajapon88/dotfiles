@@ -36,4 +36,5 @@ eval "$(direnv hook bash)"
 # BEGIN ANSIBLE MANAGED BLOCK ghq
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+[ -e "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
 # END ANSIBLE MANAGED BLOCK ghq

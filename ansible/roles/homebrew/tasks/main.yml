@@ -44,6 +44,7 @@
     block: |
       alias g='cd $(ghq root)/$(ghq list | peco)'
       alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+      [ -e "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
     marker: "# {mark} ANSIBLE MANAGED BLOCK ghq"
     create: yes
 - name: reload .bash_profile
