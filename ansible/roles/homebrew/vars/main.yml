@@ -2,6 +2,7 @@ homebrew:
   taps:
     - homebrew/cask
     - homebrew/cask-versions
+    - sanemat/font
   packages:
     - name: ansible
     - name: git
@@ -34,6 +35,8 @@ homebrew:
     - name: gradle-completion
     - name: direnv
     - name: nuget
+    - name: ricty
+      options: --powerline --vim-powerline
   cask_packages:
     - name: java8
     - name: macdown

@@ -25,6 +25,18 @@
   environment:
     HOMEBREW_CASK_OPTS: '--appdir=/Applications'
   with_items: '{{ homebrew.cask_packages }}'
+- name: install Ricty
+  block:
+    - name: get Ricty ttf files
+      shell: ls $(brew --prefix ricty)/share/fonts/Ricty*.ttf
+      register: ricty_files
+      changed_when: false
+    - name: install Ricty
+      copy:
+        src: '{{ item }}'
+        dest: ~/Library/Fonts/
+      with_items: "{{ ricty_files.stdout_lines }}"
+      notify: run fc-cache
 - name: add completions
   blockinfile:
     dest: ~/.bashrc
