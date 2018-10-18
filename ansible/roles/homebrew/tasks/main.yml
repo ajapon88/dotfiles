@@ -1,28 +1,30 @@
+- name: update
+  homebrew:
+    update_homebrew: yes
+- name: tap
+  homebrew_tap:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ homebrew.taps }}'
+- name: install packages
+  homebrew:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") }}'
+    options: '{{ item.options | default(None) }}'
+  with_items: '{{ homebrew.packages }}'
 - name: add homebrew cask opts
   lineinfile:
     dest: ~/.bashrc
     line: 'export HOMEBREW_CASK_OPTS="--appdir=/Applications"'
     create: yes
-- name: hombrew update
-  homebrew:
-    update_homebrew: yes
-- name: homebrew tap
-  homebrew_tap:
-    name: '{{ item }}'
-    state: present
-  with_items: '{{ homebrew.taps }}'
-- name: homebrew cask packages install
+- name: install cask packages
   homebrew_cask:
     name: '{{ item.name }}'
     state: installed
+    options: '{{ item.options | default(None) }}'
   environment:
     HOMEBREW_CASK_OPTS: '--appdir=/Applications'
   with_items: '{{ homebrew.cask_packages }}'
-- name: homebrew packages install
-  homebrew:
-    name: '{{ item.name }}'
-    state: '{{ item.state | default("present") }}'
-  with_items: '{{ homebrew.packages }}'
 - name: add completions
   blockinfile:
     dest: ~/.bashrc

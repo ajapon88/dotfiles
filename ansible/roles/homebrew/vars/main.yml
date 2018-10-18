@@ -2,15 +2,6 @@ homebrew:
   taps:
     - homebrew/cask
     - homebrew/cask-versions
-  cask_packages:
-    - name: java8
-    - name: macdown
-    - name: docker
-    - name: sourcetree
-    - name: virtualbox
-    - name: vagrant
-    - name: visual-studio-code
-    - name: iterm2
   packages:
     - name: ansible
     - name: git
@@ -43,3 +34,12 @@ homebrew:
     - name: gradle-completion
     - name: direnv
     - name: nuget
+  cask_packages:
+    - name: java8
+    - name: macdown
+    - name: docker
+    - name: virtualbox
+    - name: vagrant
+    - name: iterm2
+    - name: sourcetree
+    - name: visual-studio-code
