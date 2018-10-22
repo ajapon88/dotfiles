@@ -37,3 +37,6 @@ bind refs P         ?git push -u origin %(branch)
 bind refs D         ?git branch -d %(branch)
 
 bind refs x         ?sh -c "git branch --merged | grep -vE '^\\*|master$|develop$|development$' | xargs -I % git branch -d %"
+
+# delete
+bind status D       ?rm %(file)
