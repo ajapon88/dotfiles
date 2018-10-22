@@ -20,6 +20,20 @@ bind main    <Esc>b !git checkout -b "%(prompt Enter branch name: )" %(commit)
 bind generic F      >git fetch -p %(remote)
 bind main    F      >git fetch -p %(remote)
 
+# pull
+bind generic U      >git pull #(remote)
+
 # commit
 bind status C       >git commit -m "%(prompt Enter commit message: )"
 bind status <Esc>c  >git commit
+
+# reset --soft
+bind generic ^      ?git reset --soft HEAD^
+
+# push
+bind refs P         ?git push -u origin %(branch)
+
+# branch -d
+bind refs D         ?git branch -d %(branch)
+
+bind refs x         ?sh -c "git branch --merged | grep -vE '^\\*|master$|develop$|development$' | xargs -I % git branch -d %"
