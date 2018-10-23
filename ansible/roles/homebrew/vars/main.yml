@@ -45,3 +45,5 @@ homebrew:
     - name: vagrant
     - name: iterm2
     - name: appcleaner
+    - name: cryptomator
+    - name: bitwarden
