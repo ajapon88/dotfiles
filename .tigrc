@@ -40,3 +40,12 @@ bind refs x         ?sh -c "git branch --merged | grep -vE '^\\*|master$|develop
 
 # delete
 bind status D       ?rm %(file)
+
+# stash
+bind generic S      ?git stash save "%(prompt Enter stash comment: )"
+
+bind diff    Y      ?git stash pop %(stash)
+bind stash   Y      ?git stash pop %(stash)
+
+bind diff    <Esc>y ?git stash apply %(stash)
+bind stash   <Esc>y ?git stash apply %(stash)
