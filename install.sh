@@ -22,6 +22,14 @@ ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.tigrc" "${HOME}/.tigrc"
 
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
 
+[ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
+
+if [ -d "${DOTFILES_PATH}/.config" ]; then
+  for file in `ls .config`; do
+    ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.config/${file}" "${HOME}/.config/${file}"
+  done
+fi
+
 [ ! -e "${HOME}/bin" ] && mkdir "${HOME}/bin"
 
 if [ -d "${DOTFILES_PATH}/bin" ]; then
