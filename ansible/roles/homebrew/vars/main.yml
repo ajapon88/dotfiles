@@ -45,5 +45,3 @@ homebrew:
     - name: vagrant
     - name: iterm2
     - name: appcleaner
-    - name: sourcetree
-    - name: visual-studio-code
