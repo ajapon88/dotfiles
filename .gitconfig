@@ -9,6 +9,9 @@
 	default = current
 [pack]
 	threads = 4
+[user]
+	name = ajapon88
+	email = ajapon88@gmail.com
 [alias]
     alias = "!f(){ git config --get-regexp alias|cut -d'.' -f2|if [ -z $1 ];then cut -d' ' -f1|column; else grep $1' '; fi }; f"
     showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...HEAD | grep 'Merge pull request #' | head -n 1; }; f"
@@ -29,8 +32,8 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[ghq]
+	root = ~/repos
 [include]
     path = .gitconfig.os
     path = .gitconfig.local
-[ghq]
-	root = ~/repos

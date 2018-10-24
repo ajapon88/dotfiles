@@ -1,21 +1,12 @@
-- name: add rbenv init
-  blockinfile:
-    dest: ~/.bash_profile
-    block: |
-      # rbenv
-      export PATH=${HOME}/.rbenv/bin:${PATH}
-      eval "$(rbenv init -)"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK rbenv"
-    create: yes
-- name: reload .bash_profile
-  shell: source ~/.bash_profile executable=/bin/bash
-  changed_when: false
+- name: install rbenv
+  homebrew:
+    name: ['rbenv', 'ruby-build']
 - name: check installed ruby versions
-  shell: 'rbenv versions'
+  shell: sh -lc 'rbenv versions'
   register: installed_ruby_versions
   changed_when: false
 - name: install ruby
-  shell: 'rbenv install {{ item }}'
+  shell: sh -lc 'rbenv install {{ item }}'
   register: install
   failed_when: install.rc != 1
   changed_when: '"already exists" not in install.stderr'
@@ -24,12 +15,12 @@
   include: global.yml version={{ rbenv.global }}
   when: rbenv.global
 - name: rbenv rehash
-  shell: rbenv rehash
+  shell: sh -lc 'rbenv rehash'
   changed_when: false
 - name: check installed gems
-  shell: 'gem list --local'
+  shell: sh -lc 'gem list --local'
   register: installed_gems
   changed_when: false
 - name: install bundler
-  shell: gem install bundler
+  shell: sh -lc 'gem install bundler'
   when: '"bundler" not in installed_gems.stdout'

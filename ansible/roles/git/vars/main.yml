@@ -1,8 +1,0 @@
-git:
-  configs:
-    - name: user.name
-      value: 
-    - name: user.email
-      value: 
-    - name: http.postBuffer
-      value: 524288000

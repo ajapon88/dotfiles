@@ -1,7 +1,7 @@
 - name: check rbenv global
-  shell: rbenv global
+  shell: sh -lc 'rbenv global'
   register: rbenv_global
   changed_when: false
 - name: rbenv global {{ version }}
-  shell: rbenv global {{ version }}
+  shell: sh -lc 'rbenv global {{ version }}'
   when: version not in rbenv_global.stdout

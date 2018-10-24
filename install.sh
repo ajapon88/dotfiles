@@ -39,8 +39,6 @@ if [ -d "${DOTFILES_PATH}/bin" ]; then
   done
 fi
 
-[ ! -e "${HOME}/.gitconfig.local" ] && cp "${DOTFILES_PATH}/.gitconfig.local" "${HOME}/.gitconfig.local"
-
 if [ "$(uname)" == 'Darwin' ]; then
   ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
 fi

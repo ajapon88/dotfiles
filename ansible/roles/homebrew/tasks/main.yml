@@ -15,11 +15,6 @@
     state: '{{ item.state | default("present") }}'
     options: '{{ item.options | default(None) }}'
   with_items: '{{ homebrew.packages }}'
-- name: add homebrew cask opts
-  lineinfile:
-    dest: ~/.bashrc
-    line: 'export HOMEBREW_CASK_OPTS="--appdir=/Applications"'
-    create: yes
 - name: install cask packages
   homebrew_cask:
     name: '{{ item.name }}'
@@ -40,30 +35,3 @@
         dest: ~/Library/Fonts/
       with_items: "{{ ricty_files.stdout_lines }}"
       notify: run fc-cache
-- name: add completions
-  blockinfile:
-    dest: ~/.bashrc
-    block: |
-      [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
-    marker: "# {mark} ANSIBLE MANAGED BLOCK completions"
-    create: yes
-- name: direnv
-  blockinfile:
-    dest: ~/.bashrc
-    block: |
-      export EDITOR=code
-      eval "$(direnv hook bash)"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK direnv"
-    create: yes
-- name: ghq
-  blockinfile:
-    dest: ~/.bashrc
-    block: |
-      alias g='cd $(ghq root)/$(ghq list | peco)'
-      alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
-      [ -e "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK ghq"
-    create: yes
-- name: reload .bash_profile
-  shell: source ~/.bash_profile executable=/bin/bash
-  changed_when: false

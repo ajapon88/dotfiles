@@ -29,8 +29,6 @@ homebrew:
     - name: wget
     - name: pwgen
     - name: sqlite
-    - name: rbenv
-    - name: ruby-build
     - name: gradle
     - name: gradle-completion
     - name: direnv
