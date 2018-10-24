@@ -1,0 +1,8 @@
+- name: install ruby {{ item }}'
+  shell: sh -lc 'rbenv install -s {{ item }}'
+  register: result
+  changed_when: result.stdout != ""
+- name: install bundler
+  shell: sh -lc 'RBENV_VERSION="{{ item }}" gem install bundler --conservative'
+  register: result
+  changed_when: result.stdout != ""

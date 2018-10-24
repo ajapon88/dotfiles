@@ -1,26 +1,8 @@
 - name: install rbenv
   homebrew:
     name: ['rbenv', 'ruby-build']
-- name: check installed ruby versions
-  shell: sh -lc 'rbenv versions'
-  register: installed_ruby_versions
-  changed_when: false
-- name: install ruby
-  shell: sh -lc 'rbenv install {{ item }}'
-  register: install
-  failed_when: install.rc != 1
-  changed_when: '"already exists" not in install.stderr'
+- include: version.yml
   with_items: '{{ rbenv.installs }}'
 - name: set rbenv global
   include: global.yml version={{ rbenv.global }}
   when: rbenv.global
-- name: rbenv rehash
-  shell: sh -lc 'rbenv rehash'
-  changed_when: false
-- name: check installed gems
-  shell: sh -lc 'gem list --local'
-  register: installed_gems
-  changed_when: false
-- name: install bundler
-  shell: sh -lc 'gem install bundler'
-  when: '"bundler" not in installed_gems.stdout'
