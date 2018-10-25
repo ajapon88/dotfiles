@@ -1,7 +1,13 @@
 - name: install rbenv
   homebrew:
     name: ['rbenv', 'ruby-build']
-- include: version.yml
+- name: check latest version
+  shell: sh -lc 'rbenv install -l | grep -v - | tail -1 | tr -d " "'
+  register: latest
+  changed_when: false
+- debug:
+    msg: 'latest version: {{ latest.stdout }}'
+- include: version.yml version={{ item }}
   with_items: '{{ rbenv.installs }}'
 - name: set rbenv global
   include: global.yml version={{ rbenv.global }}

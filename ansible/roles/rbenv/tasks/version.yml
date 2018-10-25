@@ -1,8 +1,8 @@
-- name: install ruby {{ item }}'
-  shell: sh -lc 'rbenv install -s {{ item }}'
+- name: install ruby {{ version }}
+  shell: sh -lc 'rbenv install -s "{% if version == 'latest' %}{{ latest.stdout }}{% else %}{{ version }}{% endif %}"'
   register: result
   changed_when: result.stdout != ""
 - name: install bundler
-  shell: sh -lc 'RBENV_VERSION="{{ item }}" gem install bundler --conservative'
+  shell: sh -lc 'RBENV_VERSION="{% if version == 'latest' %}{{ latest.stdout }}{% else %}{{ version }}{% endif %}" gem install bundler --conservative'
   register: result
   changed_when: result.stdout != ""

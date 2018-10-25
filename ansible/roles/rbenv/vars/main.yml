@@ -1,4 +1,4 @@
 rbenv:
   installs:
-    - 2.5.3
-  global: 2.5.3
+    - latest
+  global: latest
