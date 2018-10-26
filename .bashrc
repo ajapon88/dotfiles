@@ -33,6 +33,10 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 export PATH=${HOME}/.rbenv/bin:${PATH}
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# goenv
+export PATH=${HOME}/.goenv/bin:${PATH}
+if which goenv > /dev/null; then eval "$(goenv init -)"; fi
+
 # direnv
 if which direnv > /dev/null; then eval "$(direnv hook bash)"; fi
 

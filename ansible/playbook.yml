@@ -6,4 +6,5 @@
     - pip
     - homebrew
     - rbenv
+    - goenv
     - android

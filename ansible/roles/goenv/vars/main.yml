@@ -1,0 +1,4 @@
+goenv:
+  installs:
+    - latest
+  global: latest

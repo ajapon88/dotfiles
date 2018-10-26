@@ -4,4 +4,4 @@
   changed_when: false
 - name: rbenv global {{ version }}
   shell: sh -lc 'rbenv global "{% if rbenv.global == 'latest' %}{{ latest.stdout }}{% else %}{{ rbenv.global }}{% endif %}"'
-  when: latest.stdout != result.stdout and rbenv.global != result.stdout
+  when: (version == 'latest' and latest.stdout != result.stdout) or (version != 'latest' and rbenv.global != result.stdout)

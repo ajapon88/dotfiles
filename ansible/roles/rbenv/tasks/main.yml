@@ -6,7 +6,7 @@
   register: latest
   changed_when: false
 - debug:
-    msg: 'latest version: {{ latest.stdout }}'
+    msg: 'ruby latest version: {{ latest.stdout }}'
 - include: version.yml version={{ item }}
   with_items: '{{ rbenv.installs }}'
 - name: set rbenv global
