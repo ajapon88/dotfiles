@@ -12,6 +12,8 @@ homebrew:
     - name: ghq
     - name: peco
     - name: hub
+    - name: svn
+    - name: colorsvn
     - name: bash-completion
     - name: vim
     - name: macvim
