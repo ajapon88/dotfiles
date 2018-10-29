@@ -36,7 +36,10 @@ homebrew:
     - name: direnv
     - name: nuget
     - name: ricty
-      options: --powerline --vim-powerline
+      options:
+        - --with-oblique
+        - --with-patch-in-place
+        - --with-powerline
   cask_packages:
     - name: java8
     - name: macdown

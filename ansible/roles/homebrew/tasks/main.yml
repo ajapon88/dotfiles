@@ -25,7 +25,7 @@
   with_items: '{{ homebrew.cask_packages }}'
 - name: install Ricty
   block:
-    - name: get Ricty ttf files
+    - name: get Ricty file list
       shell: ls $(brew --prefix ricty)/share/fonts/Ricty*.ttf
       register: ricty_files
       changed_when: false
