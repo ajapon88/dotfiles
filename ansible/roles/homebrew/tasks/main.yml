@@ -1,8 +1,6 @@
 - name: update
   homebrew:
     update_homebrew: yes
-- name: upgrade
-  homebrew:
     upgrade_all: yes
 - name: tap
   homebrew_tap:
