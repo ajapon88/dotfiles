@@ -16,7 +16,7 @@ alias rm-thumbs='find . -name "Thumbs.db" -print -exec rm -f {} \;'
 alias rm-empties='find . -mindepth 1 -type d -empty -delete -print'
 
 
-if which brew > /dev/null; then
+if which brew > /dev/null 2>&1; then
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
     # completion
@@ -34,15 +34,19 @@ GIT_PS1_SHOWDIRTYSTATE=true
 export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\\$ '
 
 # rbenv
-export PATH=${HOME}/.rbenv/bin:${PATH}
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if [ -d "${HOME}/.rbenv" ]; then
+  export PATH=${HOME}/.rbenv/bin:${PATH}
+  if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
+fi
 
 # goenv
-export PATH=${HOME}/.goenv/bin:${PATH}
-if which goenv > /dev/null; then eval "$(goenv init -)"; fi
+if [ -d "${HOME}/.goenv" ]; then
+  export PATH=${HOME}/.goenv/bin:${PATH}
+  if which goenv > /dev/null 2>&1; then eval "$(goenv init -)"; fi
+fi
 
 # direnv
-if which direnv > /dev/null; then eval "$(direnv hook bash)"; fi
+if which direnv > /dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
 # ghq
 alias g='cd $(ghq root)/$(ghq list | peco)'
