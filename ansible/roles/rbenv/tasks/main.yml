@@ -1,8 +1,21 @@
 - name: install rbenv
-  homebrew:
-    name: ['rbenv', 'ruby-build']
+  git:
+    repo: https://github.com/sstephenson/rbenv.git
+    dest: ~/.rbenv
+- name: install plugins
+  git:
+    repo: '{{ item.repo }}'
+    dest: '~/.rbenv/plugins/{{ item.name }}'
+  with_items: '{{ rbenv.plugins }}'
+- name: rehash
+  shell: bash -lc 'rbenv rehash'
+  changed_when: false
+- name: set default gems
+  copy:
+    src: default-gems
+    dest: ~/.rbenv/default-gems
 - name: check latest version
-  shell: sh -lc 'rbenv install -l | grep -v - | tail -1 | tr -d " "'
+  shell: bash -lc 'rbenv install -l | grep -v - | tail -1 | tr -d " "'
   register: latest
   changed_when: false
 - debug:

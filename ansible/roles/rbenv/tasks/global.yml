@@ -1,7 +1,7 @@
 - name: check rbenv global
-  shell: sh -lc 'rbenv global'
+  shell: bash -lc 'rbenv global'
   register: result
   changed_when: false
 - name: rbenv global {{ version }}
-  shell: sh -lc 'rbenv global "{% if rbenv.global == 'latest' %}{{ latest.stdout }}{% else %}{{ rbenv.global }}{% endif %}"'
+  shell: bash -lc 'rbenv global "{% if rbenv.global == 'latest' %}{{ latest.stdout }}{% else %}{{ rbenv.global }}{% endif %}"'
   when: (version == 'latest' and latest.stdout != result.stdout) or (version != 'latest' and rbenv.global != result.stdout)
