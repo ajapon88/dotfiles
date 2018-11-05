@@ -1,7 +1,7 @@
 - name: check goenv global
-  shell: sh -lc 'goenv global'
+  shell: bash -lc 'goenv global'
   register: result
   changed_when: false
 - name: goenv global {{ version }}
-  shell: sh -lc 'goenv global "{% if goenv.global == 'latest' %}{{ latest.stdout }}{% else %}{{ goenv.global }}{% endif %}"'
+  shell: bash -lc 'goenv global "{% if goenv.global == 'latest' %}{{ latest.stdout }}{% else %}{{ goenv.global }}{% endif %}"'
   when: (version == 'latest' and latest.stdout != result.stdout) or (version != 'latest' and goenv.global != result.stdout)

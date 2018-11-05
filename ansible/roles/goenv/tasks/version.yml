@@ -1,4 +1,4 @@
 - name: install go {{ version }}
-  shell: sh -lc 'goenv install -s "{% if version == 'latest' %}{{ latest.stdout }}{% else %}{{ version }}{% endif %}" 2>&1'
+  shell: bash -lc 'goenv install -s "{% if version == 'latest' %}{{ latest.stdout }}{% else %}{{ version }}{% endif %}" 2>&1'
   register: result
   changed_when: result.stdout != ""
