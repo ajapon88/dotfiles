@@ -16,7 +16,9 @@ homebrew:
     - name: colorsvn
     - name: bash-completion
     - name: vim
+      options: with-lua
     - name: macvim
+      options: with-lua
     - name: pacvim
     - name: jq
     - name: mono
@@ -37,9 +39,8 @@ homebrew:
     - name: nuget
     - name: ricty
       options:
-        - --with-oblique
-        - --with-patch-in-place
-        - --with-powerline
+        - with-patch-in-place
+        - with-powerline
   cask_packages:
     - name: java8
     - name: macdown
