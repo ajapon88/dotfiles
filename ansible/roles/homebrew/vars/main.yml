@@ -37,6 +37,8 @@ homebrew:
     - name: gradle-completion
     - name: direnv
     - name: nuget
+    - name: graphviz
+    - name: plantuml
     - name: ricty
       options:
         - with-patch-in-place
