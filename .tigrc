@@ -66,7 +66,7 @@ bind diff    <Esc>m ?git merge %(commit)
 # revert
 bind main    !      ?git revert %(commit)
 
-# ; で GitHub の該当コミットを開く ※要 hub インストール
+# ; で GitHub の該当コミットを開く
 bind main    ;      @hub browse -- commit/%(commit)
 bind blame   ;      @hub browse -- commit/%(commit)
 bind diff    ;      @hub browse -- commit/%(commit)
@@ -81,7 +81,7 @@ bind tree    <Esc>; @hub browse -- blob/"%(prompt Enter branch name: )"/%(file)
 bind blob    <Esc>; @hub browse -- blob/"%(prompt Enter branch name: )"/%(file)
 bind grep    <Esc>; @hub browse -- blob/"%(prompt Enter branch name: )"/%(file)
 
-# w で GitHub の該当ブランチの Pull Request 作成ページを開く ※要 hub インストール
-bind main    w      @hub browse -- compare/%(branch)?expand=1
-bind diff    w      @hub browse -- compare/%(branch)?expand=1
-bind refs    w      @hub browse -- compare/%(branch)?expand=1
+# w で GitHub の該当ブランチの Pull Request 作成ページを開く
+bind main    w      @hub browse -- pull/%(branch)
+bind diff    w      @hub browse -- pull/%(branch)
+bind refs    w      @hub browse -- pull/%(branch)

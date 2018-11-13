@@ -9,6 +9,11 @@
 	default = current
 [pack]
 	threads = 4
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [user]
 	name = ajapon88
 	email = ajapon88@gmail.com
@@ -24,16 +29,10 @@
     authors = !"git log --pretty=format:%an | sort | uniq"
     commiters = !"git log --pretty=format:%cn | sort | uniq"
     root = "!exec $SHELL ; :"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[ghq]
-	root = ~/repos
+    propen = "!hub browse -- \"pull/$(git symbolic-ref --short HEAD)\""
+    bropen = "!hub browse -- \"tree/$(git symbolic-ref --short HEAD)\""
 [include]
     path = .gitconfig.os
     path = .gitconfig.local
+[ghq]
+	root = ~/repos
