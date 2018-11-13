@@ -10,21 +10,11 @@ alias be='bundle exec'
 # other
 alias svn='colorsvn'
 alias securerandom='ruby -r securerandom -e "puts SecureRandom.urlsafe_base64"'
-alias dns-clean='sudo killall -HUP mDNSResponder'
-alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
 alias rm-thumbs='find . -name "Thumbs.db" -print -exec rm -f {} \;'
 alias rm-empties='find . -mindepth 1 -type d -empty -delete -print'
-
-
-if which brew > /dev/null 2>&1; then
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-    # completion
-    for file in "bash_completion" "bash_completion.d/git-prompt.sh" "bash_completion.d/git-completion.bash"; do
-        file_path=$(brew --prefix)/etc/${file}
-        [ -f "${file_path}" ] && source "${file_path}"
-    done
-fi
+alias docker-kill-all='docker kill $(docker ps -q)'
+alias docker-delete-all-stop-contaners='docker rm $(docker ps -a -q)'
+alias docker-delete-all-images='docker rmi $(docker images -q)'
 
 # git
 # export GIT_TRACE_PACKET=1
@@ -53,4 +43,5 @@ alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
 
+[ -e ~/.bashrc.os ] && source ~/.bashrc.os
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local

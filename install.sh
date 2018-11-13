@@ -41,9 +41,7 @@ fi
 
 if [ "$(uname)" == 'Darwin' ]; then
   ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig.osx" "${HOME}/.gitconfig.os"
-fi
-
-if [ "$(uname)" == 'Darwin' ]; then
+  ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.bashrc.osx" "${HOME}/.bashrc.os"
   # homebrew
   [ ! `which brew` ] &&  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   [ ! `which ansible-playbook` ] && brew install ansible
