@@ -11,15 +11,9 @@ do
   esac
 done
 
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.vimrc" "${HOME}/.vimrc"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.vim" "${HOME}/.vim"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.bashrc" "${HOME}/.bashrc"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.bash_profile" "${HOME}/.bash_profile"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitconfig" "${HOME}/.gitconfig"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.gitignore_global" "${HOME}/.gitignore_global"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.screenrc" "${HOME}/.screenrc"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.tmux.conf" "${HOME}/.tmux.conf"
-ln -visn ${LN_FORCE} "${DOTFILES_PATH}/.tigrc" "${HOME}/.tigrc"
+for file in .vimrc .vim .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc; do
+  ln -visn ${LN_FORCE} "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
+done
 
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
 
