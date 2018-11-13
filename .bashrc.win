@@ -1,4 +1,6 @@
 export MSYS=winsymlinks:nativestrict
 
-alias g='cd $(ghq root)/$(ghq list | fzy)'
-alias gh='hub browse $(ghq list | fzy | cut -d "/" -f 2,3)'
+if which fzy > /dev/null 2>&1; then
+  alias g='cd $(ghq root)/$(ghq list | fzy)'
+  alias gh='hub browse $(ghq list | fzy | cut -d "/" -f 2,3)'
+fi
