@@ -1,4 +1,3 @@
 # load .bashrc
-if [ -f ~/.bashrc ] ; then
-  . ~/.bashrc
-fi
+[ -f /etc/.bashrc ] && source /etc/.bashrc
+[ -f ~/.bashrc ]  && source ~/.bashrc

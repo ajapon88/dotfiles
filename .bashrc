@@ -29,6 +29,10 @@ if [ -d "${HOME}/.rbenv" ]; then
   if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 fi
 
+# go
+export GOPATH=~/go
+export PATH=${GOPATH}/bin:${PATH}
+
 # goenv
 if [ -d "${HOME}/.goenv" ]; then
   export PATH=${HOME}/.goenv/bin:${PATH}
@@ -42,6 +46,8 @@ if which direnv > /dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
+
+[ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
 
 [ -e ~/.bashrc.os ] && source ~/.bashrc.os
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
