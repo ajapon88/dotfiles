@@ -5,6 +5,7 @@
     quotepath = false
     excludesfile = ~/.gitignore_global
     editor = vim -c \"set fenc=utf-8\"
+    symlinks = true
 [push]
 	default = current
 [pack]
