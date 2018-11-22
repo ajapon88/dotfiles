@@ -26,7 +26,7 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 # rbenv
 if [ -d "${HOME}/.rbenv" ]; then
   export PATH=${HOME}/.rbenv/bin:${PATH}
-  if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
+  if which rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 fi
 
 # go
@@ -36,11 +36,11 @@ export PATH=${GOPATH}/bin:${PATH}
 # goenv
 if [ -d "${HOME}/.goenv" ]; then
   export PATH=${HOME}/.goenv/bin:${PATH}
-  if which goenv > /dev/null 2>&1; then eval "$(goenv init -)"; fi
+  if which goenv >/dev/null 2>&1; then eval "$(goenv init -)"; fi
 fi
 
 # direnv
-if which direnv > /dev/null 2>&1; then eval "$(direnv hook bash)"; fi
+if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
 # ghq
 alias g='cd $(ghq root)/$(ghq list | peco)'

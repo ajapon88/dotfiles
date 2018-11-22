@@ -1,12 +1,12 @@
 alias dns-clean='sudo killall -HUP mDNSResponder'
 alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
 
-if which brew > /dev/null 2>&1; then
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+if which brew >/dev/null 2>&1; then
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-    # completion
-    for file in "bash_completion" "bash_completion.d/git-prompt.sh" "bash_completion.d/git-completion.bash"; do
-        file_path=$(brew --prefix)/etc/${file}
-        [ -f "${file_path}" ] && source "${file_path}"
-    done
+  # completion
+  for file in "bash_completion" "bash_completion.d/git-prompt.sh" "bash_completion.d/git-completion.bash"; do
+    file_path=$(brew --prefix)/etc/${file}
+    [ -f "${file_path}" ] && source "${file_path}"
+  done
 fi

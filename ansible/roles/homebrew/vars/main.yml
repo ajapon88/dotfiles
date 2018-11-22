@@ -39,6 +39,7 @@ homebrew:
     - name: nuget
     - name: graphviz
     - name: plantuml
+    - name: shfmt
     - name: ricty
       options:
         - with-patch-in-place
