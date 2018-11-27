@@ -40,6 +40,7 @@ homebrew:
     - name: graphviz
     - name: plantuml
     - name: shfmt
+    - name: the_silver_searcher
     - name: ricty
       options:
         - with-patch-in-place
