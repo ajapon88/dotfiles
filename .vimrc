@@ -17,172 +17,44 @@ endif
 
 
 " Required:
-execute 'set runtimepath^=' . s:vim_dir
 execute 'set runtimepath+=' . s:dein_dir
 
-" Required:
-call dein#begin(s:plugin_dir)
+if dein#load_state(s:dein_dir)
+  " Required:
+  call dein#begin(s:plugin_dir)
 
-" Let dein manage dein
-" Required:
-call dein#add('Shougo/dein.vim')
+  " Let dein manage dein
+  " Required:
+  call dein#add('Shougo/dein.vim')
 
-" Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-" 補完
-call dein#add('Shougo/neocomplcache.vim')
-call dein#add('Shougo/neocomplcache-rsense.vim')
-" call dein#add('supermomonga/neocomplete-rsense.vim')
-call dein#add('marcus/rsense')
+  " Add or remove your plugins here:
 
-call dein#add('tomasr/molokai')
+  " colorscheme
+  call dein#add('tomasr/molokai')
 
-call dein#add('tpope/vim-endwise')
-"
-" You can specify revision/branch/tag.
-call dein#add('Shougo/vimshell')
-
-"Syntax
-call dein#add('vim-syntastic/syntastic')
-
-"ruby
-call dein#add('ngmy/vim-rubocop')
-
-" Erlang
-call dein#add('vim-erlang/vim-erlang-omnicomplete')
-call dein#add('vim-erlang/vim-erlang-compiler')
-call dein#add('vim-erlang/vim-erlang-tags')
-call dein#add('vim-erlang/vim-erlang-runtime')
-call dein#add('airblade/vim-rooter')
-call dein#add('thinca/vim-quickrun')
-call dein#add('osyo-manga/shabadou.vim')
-call dein#add('osyo-manga/vim-watchdogs')
-call dein#add('cohama/vim-hier')
-call dein#add('dannyob/quickfixstatus')
-
-" Required:
-call dein#end()
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
+  " Required:
+  call dein#end()
+  call dein#save_state()
+  "
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
 endif
 
-
 " Vim終了時に現在のセッションを保存する
-au VimLeave * mks!  ~/vimsession
+au VimLeave * mks! ~/vimsession
 
 "引数なし起動の時、前回のsessionを復元
 autocmd VimEnter * nested if @% == '' && s:GetBufByte() == 0 | source ~/vimsession | endif
 function! s:GetBufByte()
-    let byte = line2byte(line('$') + 1)
-    if byte == -1
-        return 0
-    else
-        return byte - 1
-    endif
+  let byte = line2byte(line('$') + 1)
+  if byte == -1
+    return 0
+  else
+    return byte - 1
+  endif
 endfunction
-
-" 全角スペース可視化
-"augroup highlightIdegraphicSpace
-"  autocmd!
-"  autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
-"  autocmd VimEnter,WinEnter * match IdeographicSpace /　/
-"augroup END
-set list
-set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
-
-" -------------------------------
-" Rsense
-" -------------------------------
-" let g:rsenseHome = '/usr/local/lib/rsense-0.3'
-let g:rsenseUseOmniFunc = 1
-
-" --------------------------------
-" neocomplcache.vim
-" --------------------------------
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Rsense用の設定
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
-" --------------------------------
-" syntastic
-" --------------------------------
-" syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
-" active_filetypesに、保存時にsyntasticを走らせるファイルタイプを指定する
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-
-let g:syntastic_ruby_checkers = ['rubocop']
-
-" --------------------------------
-" tag
-" --------------------------------
-"set tags+=.git/tags,tags
-let g:rooter_use_lcd = 1
-autocmd BufEnter * :Rooter
-
-" --------------------------------
-" watchdogs
-" --------------------------------
-"let g:quickrun_config = {
-"    \ "watchdogs_checker/_" : {
-"    \     "hook/close_quickfix/enable_exit" : 1,
-"    \     "runner" : "vimproc",
-"    \     "runner/vimproc/updatetime" : 10,
-"    \     "outputter/quickfix/open_cmd" : "",
-"    \     "hook/qfstatusline_update/enable_exit" : 1,
-"    \     "hook/qfstatusline_update/priority_exit" : 4,
-"    \ },
-"    \ "erlang/watchdogs_checker" : {
-"    \     "type" : "watchdogs_checker/flymake",
-"    \ },
-"    \ "watchdogs_checker/flymake" : {
-"    \     "command"   : expand('~/.vim/bundle/vim-erlang-compiler/compiler/erlang_check.erl'),
-"    \     "exec"      : "%c %o %s:p ",
-"    \ },
-"    \ }
-
-"call watchdogs#setup(g:quickrun_config)
-
-"let g:watchdogs_check_BufWritePost_enable = 1
-
-" --------------------------------
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " --------------------------------
 " 基本設定
@@ -206,7 +78,7 @@ set number
 set ruler
 set incsearch
 set hlsearch
-"set nowrap
+set wrap
 set showmatch
 set whichwrap=b,s,h,l,<,>,[,]
 set wrapscan
