@@ -26,6 +26,10 @@ if dein#load_state(s:dein_dir)
   " colorscheme
   call dein#add('tomasr/molokai')
 
+  " neocomplete
+  call dein#add('Shougo/neocomplete.vim')
+
+
   " Required:
   call dein#end()
   call dein#save_state()
