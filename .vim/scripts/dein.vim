@@ -32,6 +32,10 @@ if dein#load_state(s:dein_dir)
   " syntax
   call dein#add('w0rp/ale')
 
+  " zenkaku space
+  call dein#add('thinca/vim-zenspace')
+
+
   " Required:
   call dein#end()
   call dein#save_state()

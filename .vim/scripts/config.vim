@@ -53,6 +53,9 @@ set confirm
 set backspace=indent,eol,start
 set autochdir
 
+set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
 " ESCでかなモードをオフにする
 inoremap <Esc> <Esc>:set iminsert=0<CR>
 " 挿入モード時の移動
