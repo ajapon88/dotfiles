@@ -29,6 +29,8 @@ if dein#load_state(s:dein_dir)
   " neocomplete
   call dein#add('Shougo/neocomplete.vim')
 
+  " syntax
+  call dein#add('w0rp/ale')
 
   " Required:
   call dein#end()
