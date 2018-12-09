@@ -15,8 +15,6 @@ homebrew:
     - name: svn
     - name: colorsvn
     - name: bash-completion
-    - name: vim
-      options: with-lua
     - name: macvim
       options: with-lua
     - name: pacvim

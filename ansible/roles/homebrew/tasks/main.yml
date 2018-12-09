@@ -1,7 +1,6 @@
 - name: update
   homebrew:
     update_homebrew: yes
-    upgrade_all: yes
 - name: tap
   homebrew_tap:
     name: '{{ item }}'
@@ -10,13 +9,13 @@
 - name: install packages
   homebrew:
     name: '{{ item.name }}'
-    state: '{{ item.state | default("present") }}'
+    state: '{{ item.state | default("latest") }}'
     options: '{{ item.options | default(None) }}'
   with_items: '{{ homebrew.packages }}'
 - name: install cask packages
   homebrew_cask:
     name: '{{ item.name }}'
-    state: installed
+    state: '{{ item.state | default("upgraded") }}'
     options: '{{ item.options | default(None) }}'
   environment:
     HOMEBREW_CASK_OPTS: '--appdir=/Applications'
