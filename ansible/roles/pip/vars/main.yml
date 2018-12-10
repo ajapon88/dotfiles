@@ -1,4 +1,5 @@
 pips:
   - name: pexpect
   - name: pylint
+  - name: yapf
 
