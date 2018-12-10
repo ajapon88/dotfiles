@@ -9,4 +9,5 @@
 - name: install pips
   pip:
     name: '{{ item.name }} '
+    extra_args: '{{ item.extra_args | default(None) }}'
   with_items: '{{ pips }}'
