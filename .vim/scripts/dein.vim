@@ -35,6 +35,9 @@ if dein#load_state(s:dein_dir)
   " zenkaku space
   call dein#add('thinca/vim-zenspace')
 
+  " rooter
+  call dein#add('airblade/vim-rooter')
+
 
   " Required:
   call dein#end()
