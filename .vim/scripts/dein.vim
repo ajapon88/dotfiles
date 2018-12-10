@@ -26,8 +26,13 @@ if dein#load_state(s:dein_dir)
   " colorscheme
   call dein#add('tomasr/molokai')
 
-  " neocomplete
-  call dein#add('Shougo/neocomplete.vim')
+  if MeetNeocompleteRequirements()
+    " neocomplete
+    call dein#add('Shougo/neocomplete.vim')
+  else
+    " neocomplcache
+    call dein#add('Shougo/neocomplcache.vim')
+  endif
 
   " syntax
   call dein#add('w0rp/ale')
