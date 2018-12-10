@@ -1,5 +1,6 @@
 alias dns-clean='sudo killall -HUP mDNSResponder'
 alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
+alias vim='mvim -v'
 
 if which brew >/dev/null 2>&1; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
