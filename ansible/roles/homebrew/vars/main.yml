@@ -2,6 +2,7 @@ homebrew:
   taps:
     - homebrew/cask
     - homebrew/cask-versions
+    - universal-ctags/universal-ctags
     - sanemat/font
   packages:
     - name: ansible
@@ -39,6 +40,8 @@ homebrew:
     - name: plantuml
     - name: shfmt
     - name: the_silver_searcher
+    - name: universal-ctags
+      state: head
     - name: ricty
       options:
         - with-patch-in-place
