@@ -75,3 +75,5 @@ nnoremap <silent> ]B :blast<CR>
 " %%でディレクトリ展開
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
+" Escape
+inoremap <silent> jj <ESC>
