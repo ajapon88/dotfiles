@@ -43,6 +43,8 @@ if dein#load_state(s:dein_dir)
   " rooter
   call dein#add('airblade/vim-rooter')
 
+  " auto
+  call dein#add('cohama/lexima.vim')
 
   " Required:
   call dein#end()
