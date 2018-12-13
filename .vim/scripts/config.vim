@@ -77,3 +77,6 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Escape
 inoremap <silent> jj <ESC>
+
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
