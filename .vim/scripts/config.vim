@@ -52,6 +52,7 @@ set nobackup
 set confirm
 set backspace=indent,eol,start
 set autochdir
+set nofixeol
 
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -79,4 +80,3 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 inoremap <silent> jj <ESC>
 
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-

@@ -22,4 +22,3 @@ source ~/.vim/scripts/config.vim
 source ~/.vim/scripts/disable-arrowkeys.vim
 
 filetype plugin indent on
-
