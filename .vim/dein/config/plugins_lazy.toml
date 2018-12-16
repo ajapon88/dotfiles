@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'google/yapf'
+rtp = 'plugins/vim'
+on_ft = ['python']
+

@@ -21,30 +21,12 @@ if dein#load_state(s:dein_dir)
   " Required:
   call dein#add('Shougo/dein.vim')
 
-  " Add or remove your plugins here:
+  let g:config_dir  = expand('~/.vim/dein/config')
+  let s:toml        = g:config_dir . '/plugins.toml'
+  let s:lazy_toml   = g:config_dir . '/plugins_lazy.toml'
 
-  " colorscheme
-  call dein#add('tomasr/molokai')
-
-  if MeetNeocompleteRequirements()
-    " neocomplete
-    call dein#add('Shougo/neocomplete.vim')
-  else
-    " neocomplcache
-    call dein#add('Shougo/neocomplcache.vim')
-  endif
-
-  " syntax
-  call dein#add('w0rp/ale')
-
-  " zenkaku space
-  call dein#add('thinca/vim-zenspace')
-
-  " rooter
-  call dein#add('airblade/vim-rooter')
-
-  " python
-  call dein#add('google/yapf', {'rtp': 'plugins/vim'})
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " Required:
   call dein#end()

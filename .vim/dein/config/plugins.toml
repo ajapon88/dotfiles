@@ -1,0 +1,30 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]  # colorscheme
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+hook_add = 'source ~/.vim/scripts/plugins/neocomplete.vim'
+if = '''has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))'''
+
+[[plugins]]
+repo = 'Shougo/neocomplcache.vim'
+hook_add = 'source ~/.vim/scripts/plugins/neocomplcache.vim'
+if = '''!(has('lua') && (v:version > 703 || (v:version == 703 && has('patch885'))))'''
+
+[[plugins]] # syntax
+repo = 'w0rp/ale'
+hook_add = 'source ~/.vim/scripts/plugins/ale.vim'
+
+[[plugins]]
+repo = 'thinca/vim-zenspace'
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+hook_add = 'source ~/.vim/scripts/plugins/rooter.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
