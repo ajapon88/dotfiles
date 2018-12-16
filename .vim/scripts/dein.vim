@@ -43,6 +43,8 @@ if dein#load_state(s:dein_dir)
   " rooter
   call dein#add('airblade/vim-rooter')
 
+  " python
+  call dein#add('google/yapf', {'rtp': 'plugins/vim'})
 
   " Required:
   call dein#end()
