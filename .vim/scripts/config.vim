@@ -16,7 +16,6 @@ endfunction
 " 基本設定
 " --------------------------------
 syntax on
-colorscheme molokai
 set t_Co=256
 
 " vim内部で使われる文字エンコーディングをutf-8に設定する

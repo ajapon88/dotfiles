@@ -3,6 +3,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]  # colorscheme
 repo = 'tomasr/molokai'
+hook_add = 'autocmd VimEnter * nested colorscheme molokai'
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
@@ -27,4 +28,3 @@ hook_add = 'source ~/.vim/scripts/plugins/rooter.vim'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
-
