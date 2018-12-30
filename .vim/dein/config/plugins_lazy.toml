@@ -3,3 +3,7 @@ repo = 'google/yapf'
 rtp = 'plugins/vim'
 on_ft = ['python']
 
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+hook_add = 'source ~/.vim/scripts/plugins/vim-monster.vim'
+on_ft = ['ruby']
