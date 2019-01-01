@@ -49,7 +49,7 @@ case "${OS}" in
   # homebrew
   [ ! $(which brew) ] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   [ ! $(which ansible-playbook) ] && brew install ansible
-  ansible-playbook -i ansible/hosts ansible/playbook.yml
+  bash -lc 'ansible-playbook -i ansible/hosts ansible/playbook.yml'
   ;;
 'Linux') ;;
 'Windows') ;;

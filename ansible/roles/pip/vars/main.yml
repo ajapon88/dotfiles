@@ -1,5 +1,11 @@
 pips:
   - name: pexpect
+    extra_args: --user
   - name: pylint
+    extra_args: --user
   - name: yapf
+    extra_args: --user
+  - name: virtualenv
+    extra_args: --user
+  - name: virtualenvwrapper
     extra_args: --user
