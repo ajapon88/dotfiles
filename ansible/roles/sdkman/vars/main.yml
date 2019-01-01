@@ -1,0 +1,6 @@
+sdkman:
+  packages:
+    - name: gradle
+      version: 4.10.3
+    - name: groovy
+      version: 2.5.5

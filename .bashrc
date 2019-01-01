@@ -47,6 +47,10 @@ if which goenv >/dev/null 2>&1; then eval "$(goenv init -)"; fi
 # direnv
 if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
 # ghq
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'

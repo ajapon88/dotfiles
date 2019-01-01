@@ -1,0 +1,17 @@
+- name: check install sdkmam
+  shell: bash -lc 'sdk --version'
+  register: result
+  ignore_errors: true
+  changed_when: false
+- name: install sdkman
+  shell: curl -s get.sdkman.io | bash
+  when: result is failed
+- name: update sdkman
+  shell: bash -lc 'sdk selfupdate'
+  register: result
+  changed_when: '"No update available at this time." not in result.stdout'
+- name: install packages
+  shell: bash -lc 'sdk install {{ item.name }} {{item.version }}'
+  register: result
+  changed_when: '"already installed" not in result.stdout'
+  with_items: '{{ sdkman.packages }}'
