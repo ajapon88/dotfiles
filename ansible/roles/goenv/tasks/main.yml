@@ -6,7 +6,7 @@
   shell: bash -lc 'goenv rehash'
   changed_when: false
 - name: check latest version
-  shell: bash -lc 'goenv install -l | grep -v - | tail -1 | tr -d " "'
+  shell: bash -lc 'goenv install -l | tr -d " " | grep -e "^[\.0-9]\+$" | tail -1'
   register: latest
   changed_when: false
 - debug:
