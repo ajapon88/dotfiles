@@ -2,6 +2,7 @@ set refresh-mode = auto
 set line-graphics = utf-8
 set ignore-space = at-eol
 set ignore-case = true
+set wrap-lines = yes
 
 # main view の左端にコミットIDを表示する
 set main-view = id date author:email-user commit-title:graph=yes,refs=yes
