@@ -37,6 +37,9 @@ bind generic +      !git commit --amend --allow-empty
 # reset --soft
 bind generic ^      ?git reset --soft HEAD^
 
+# commitハッシュをコピー
+bind generic y @sh -c "echo %(commit) | pbcopy"
+
 # push
 bind refs P         ?git push -u origin %(branch)
 
