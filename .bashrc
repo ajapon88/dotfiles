@@ -11,8 +11,9 @@ alias be='bundle exec'
 alias securerandom='ruby -r securerandom -e "puts SecureRandom.urlsafe_base64"'
 alias rm-thumbs='find . -name "Thumbs.db" -print -exec rm -f {} \;'
 alias rm-empties='find . -mindepth 1 -type d -empty -delete -print'
+alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-kill-all='docker kill $(docker ps -q)'
-alias docker-delete-all-stop-contaners='docker rm $(docker ps -a -q)'
+alias docker-delete-all-contaners='docker rm $(docker ps -a -q)'
 alias docker-delete-all-images='docker rmi $(docker images -q)'
 
 if which colorsvn >/dev/null 2>&1; then alias svn='colorsvn'; fi
