@@ -15,6 +15,8 @@ alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-kill-all='docker kill $(docker ps -q)'
 alias docker-delete-all-contaners='docker rm $(docker ps -a -q)'
 alias docker-delete-all-images='docker rmi $(docker images -q)'
+alias docker-delete-all-volumes='docker volume rm $(docker volume ls -qf dangling=true)'
+alias shfmt='shfmt -i 2 -ci -bn -s'
 
 if which colorsvn >/dev/null 2>&1; then alias svn='colorsvn'; fi
 
