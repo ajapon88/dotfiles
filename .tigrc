@@ -1,6 +1,6 @@
 set refresh-mode = auto
 set line-graphics = utf-8
-set ignore-space = at-eol
+# set ignore-space = at-eol # toggle W
 set ignore-case = true
 set wrap-lines = yes
 
