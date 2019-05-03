@@ -1,7 +1,2 @@
-- name: create android dir
-  file:
-    path: '{{ android.dir }}'
-    state: directory
 - include: sdk/main.yml
 - include: ndk/main.yml
-  with_items: '{{ android.ndk }}'

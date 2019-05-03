@@ -1,6 +1,6 @@
 - name: check installed android sdk
   stat: 
-    path: '{{ android.dir }}/android-sdk/tools/bin/sdkmanager'
+    path: '{{ android.sdk.dir }}/tools/bin/sdkmanager'
   register: installed_android_sdk
 - block:
     - name: download android sdk
@@ -10,11 +10,11 @@
         dest: '/tmp/{{ android.sdk.filename }}'
     - name: create android sdk dir
       file:
-        path: '{{ android.dir }}/android-sdk'
+        path: '{{ android.sdk.dir }}'
         state: directory
     - name: unarchive android sdk
       unarchive:
         src: '/tmp/{{ android.sdk.filename }}'
-        dest: '{{ android.dir }}/android-sdk/'
+        dest: '{{ android.sdk.dir }}/'
         remote_src: yes
   when: not installed_android_sdk.stat.exists

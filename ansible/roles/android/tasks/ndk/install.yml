@@ -1,0 +1,18 @@
+- name: check installed android ndk {{ item.version }}
+  stat: 
+    path: '{{ android.ndk.dir }}/{{ item.version }}'
+  register: installed_android_ndk
+- block:
+    - name: download android ndk {{ item.filename }}
+      get_url:
+        url: '{{ android.repository_url }}/{{ item.filename }}'
+        sha256sum: '{{ item.sha256 }}'
+        dest: '/tmp/{{ item.filename }}'
+    - name: unarchive android ndk {{ item.filename }}
+      unarchive:
+        src: '/tmp/{{ item.filename }}'
+        dest: '/tmp/'
+        remote_src: yes
+    - name: install android ndk {{ item.version }}
+      command: 'mv "/tmp/android-ndk-{{ item.version }}" "{{ android.ndk.dir }}/{{ item.version }}"'
+  when: not installed_android_ndk.stat.exists

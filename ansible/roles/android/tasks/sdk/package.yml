@@ -1,7 +1,7 @@
 - name: install sdk package {{ item.name }}
   expect:
     command: './sdkmanager --verbose "{{ item.name }}"'
-    chdir: '{{ android.dir }}/android-sdk/tools/bin/'
+    chdir: '{{ android.sdk.dir }}/tools/bin/'
     timeout: 300
     responses:
       "Accept\\? \\(y/N\\): .*": "y"
