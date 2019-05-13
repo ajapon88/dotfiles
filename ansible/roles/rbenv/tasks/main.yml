@@ -1,19 +1,19 @@
 - name: install rbenv
   git:
-    repo: https://github.com/sstephenson/rbenv.git
+    repo: https://github.com/rbenv/rbenv.git
     dest: ~/.rbenv
 - name: install plugins
   git:
     repo: '{{ item.repo }}'
     dest: '~/.rbenv/plugins/{{ item.name }}'
   with_items: '{{ rbenv.plugins }}'
-- name: rehash
-  shell: bash -lc 'rbenv rehash'
-  changed_when: false
 - name: set default gems
   copy:
     src: default-gems
     dest: ~/.rbenv/default-gems
+- name: rehash
+  shell: bash -lc 'rbenv rehash'
+  changed_when: false
 - name: check latest version
   shell: bash -lc 'rbenv install -l | grep -v - | tail -1 | tr -d " "'
   register: latest
@@ -21,7 +21,7 @@
 - debug:
     msg: 'ruby latest version: {{ latest.stdout }}'
 - include: version.yml version={{ item }}
-  with_items: '{{ rbenv.installs }}'
+  with_items: '{{ rbenv.versions }}'
 - name: set rbenv global
   include: global.yml version={{ rbenv.global }}
   when: rbenv.global

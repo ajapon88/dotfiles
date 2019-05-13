@@ -1,13 +1,13 @@
 rbenv:
   plugins:
     - name: ruby-build
-      repo: https://github.com/sstephenson/ruby-build.git
-    - name: rbenv-update
-      repo: https://github.com/rkh/rbenv-update.git
+      repo: https://github.com/rbenv/ruby-build.git
     - name: gem-rehash
       repo: https://github.com/rbenv/rbenv-gem-rehash.git
     - name: rbenv-default-gems
       repo: https://github.com/rbenv/rbenv-default-gems.git
-  installs:
+    - name: rbenv-update
+      repo: https://github.com/rkh/rbenv-update.git
+  versions:
     - latest
   global: latest
