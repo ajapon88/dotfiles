@@ -19,6 +19,7 @@ homebrew:
     - name: macvim
     - name: pacvim
     - name: jq
+    - name: yq
     - name: mono
     - name: tree
     - name: sl
