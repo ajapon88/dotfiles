@@ -1,5 +1,23 @@
 #!/bin/bash -e
 
+# https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script
+function parse_yaml() {
+  local prefix=$2
+  local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @ | tr @ '\034')
+  sed -ne "s|^\($s\):|\1|" \
+    -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
+    -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p" $1 \
+    | awk -F$fs '{
+      indent = length($1)/2;
+      vname[indent] = $2;
+      for (i in vname) {if (i > indent) {delete vname[i]}}
+      if (length($3) > 0) {
+         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+      }
+   }'
+}
+
 unity_params=()
 project_path=.
 log_file=
@@ -46,11 +64,11 @@ fi
 if [ -n "${UNITY_INSTALL_DIR}" ]; then
   unity_install_dir=${UNITY_INSTALL_DIR}
 fi
-
 version_file="${project_path%/}/ProjectSettings/ProjectVersion.txt"
 unity_version=
 if [ -e "${version_file}" ]; then
-  unity_version=$(yq r "${version_file}" m_EditorVersion)
+  eval $(parse_yaml "${version_file}")
+  unity_version=${m_EditorVersion}
 else
   unity_version=$(ls "${unity_install_dir}" | sort -n -t "." -k 1 -k 2 -k 3 -k 4 | tail -n 1)
 fi
