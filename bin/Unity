@@ -18,9 +18,26 @@ function parse_yaml() {
    }'
 }
 
+platform=
+unity_install_dir=
+unity_bin_path=
+if [ "$(uname)" == 'Darwin' ]; then
+  platform="osx"
+  unity_install_dir="/Applications/Unity/Hub/Editor"
+  unity_bin_path="Unity.app/Contents/MacOS/Unity"
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' -o "$(expr substr $(uname -s) 1 10)" == 'MINGW64_NT' ]; then
+  platform="win"
+  unity_install_dir="/c/Program Files/Unity/Hub/Editor"
+  unity_bin_path="Editor/Unity.exe"
+else
+  echo "Your platform ($(uname -a)) is not supported." 1>&2
+  exit 1
+fi
+
 unity_params=()
 project_path=.
 log_file=
+log_stdout=0
 while [ "$#" -gt 0 ]; do
   case "${1}" in
     "-projectPath")
@@ -34,9 +51,14 @@ while [ "$#" -gt 0 ]; do
     "-logFile")
       unity_params+=("-logFile")
       shift
-      if [[ ! ${1} =~ ^- ]]; then
+      if [ -n "${1}" -a ! "${1:0:1}" = "-" ]; then
         log_file="${1}"
         unity_params+=("${log_file}")
+      elif [ "${platform}" = "win" ]; then
+        # windowsは標準出力できないので一時ファイルにログを書き込む
+        log_file=$(mktemp)
+        unity_params+=("${log_file}")
+        log_stdout=1
       fi
       ;;
     *)
@@ -47,19 +69,6 @@ while [ "$#" -gt 0 ]; do
     shift
   fi
 done
-
-unity_install_dir=
-unity_bin_path=
-if [ "$(uname)" == 'Darwin' ]; then
-  unity_install_dir="/Applications/Unity/Hub/Editor"
-  unity_bin_path="Unity.app/Contents/MacOS/Unity"
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' -o "$(expr substr $(uname -s) 1 10)" == 'MINGW64_NT' ]; then
-  unity_install_dir="/c/Program Files/Unity/Hub/Editor"
-  unity_bin_path="Editor/Unity.exe"
-else
-  echo "Your platform ($(uname -a)) is not supported." 1>&2
-  exit 1
-fi
 
 if [ -n "${UNITY_INSTALL_DIR}" ]; then
   unity_install_dir=${UNITY_INSTALL_DIR}
@@ -75,4 +84,32 @@ fi
 
 unity="${unity_install_dir%/}/${unity_version}/${unity_bin_path}"
 
-"${unity}" "${unity_params[@]}"
+"${unity}" "${unity_params[@]}" &
+unity_pid=$!
+
+tail_pid=0
+if [ ${log_stdout} -eq 1 -a -n "${log_file}" ]; then
+  # 一時ファイルに書き込まれたログをtailで出力
+  tail -F "${log_file}" 2>/dev/null &
+  tail_pid=$!
+fi
+
+set +e
+wait ${unity_pid}
+rc=$?
+set -e
+if [ ${tail_pid} -ne 0 ]; then
+  sleep 1
+  kill ${tail_pid}
+  retry=3
+  while :; do
+    rm -f "${log_file}" | cat >/dev/null 2>&1
+    if [ ! -e "${log_file}" -o $retry -le 0 ]; then
+      break
+    fi
+    sleep 1
+    retry=$((retry - 1))
+  done
+fi >/dev/null 2>&1
+
+exit $rc
