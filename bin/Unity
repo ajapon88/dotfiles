@@ -1,15 +1,33 @@
 #!/bin/bash -e
 
+unity_params=()
 project_path=.
-f=0
-for opt in "${@}"; do
-  if [[ ${f} == 1 ]]; then
-    project_path=$opt
-    break
-  fi
-  case "${opt}" in
-    "-projectPath") f=1 ;;
+log_file=
+while [ "$#" -gt 0 ]; do
+  case "${1}" in
+    "-projectPath")
+      unity_params+=("-projectPath")
+      shift
+      if [[ ! ${1} =~ ^- ]]; then
+        project_path="$1"
+        unity_params+=("${project_path}")
+      fi
+      ;;
+    "-logFile")
+      unity_params+=("-logFile")
+      shift
+      if [[ ! ${1} =~ ^- ]]; then
+        log_file="${1}"
+        unity_params+=("${log_file}")
+      fi
+      ;;
+    *)
+      unity_params+=("${1}")
+      ;;
   esac
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
 done
 
 unity_install_dir=
@@ -39,4 +57,4 @@ fi
 
 unity="${unity_install_dir%/}/${unity_version}/${unity_bin_path}"
 
-"${unity}" ${@}
+"${unity}" "${unity_params[@]}"
