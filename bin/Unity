@@ -18,9 +18,6 @@ function parse_yaml() {
    }'
 }
 
-platform=
-unity_install_dir=
-unity_bin_path=
 if [ "$(uname)" == 'Darwin' ]; then
   platform="osx"
   unity_install_dir="/Applications/Unity/Hub/Editor"
@@ -33,27 +30,30 @@ else
   echo "Your platform ($(uname -a)) is not supported." 1>&2
   exit 1
 fi
+if [ -n "${UNITY_INSTALL_DIR}" ]; then
+  unity_install_dir=${UNITY_INSTALL_DIR}
+fi
 
 unity_params=()
-project_path=.
+project_path=
 log_file=
 log_stdout=0
 while [ "$#" -gt 0 ]; do
   case "${1}" in
     "-projectPath")
       unity_params+=("-projectPath")
-      shift
-      if [[ ! ${1} =~ ^- ]]; then
-        project_path="$1"
+      if [ "$#" -gt 1 -a "${2:0:1}" != "-" ]; then
+        project_path="$2"
         unity_params+=("${project_path}")
+        shift
       fi
       ;;
     "-logFile")
       unity_params+=("-logFile")
-      shift
-      if [ -n "${1}" -a ! "${1:0:1}" = "-" ]; then
-        log_file="${1}"
+      if [ "$#" -gt 1 -a "${2:0:1}" != "-" ]; then
+        log_file="${2}"
         unity_params+=("${log_file}")
+        shift
       elif [ "${platform}" = "win" ]; then
         # windowsは標準出力できないので一時ファイルにログを書き込む
         log_file=$(mktemp)
@@ -70,11 +70,9 @@ while [ "$#" -gt 0 ]; do
   fi
 done
 
-if [ -n "${UNITY_INSTALL_DIR}" ]; then
-  unity_install_dir=${UNITY_INSTALL_DIR}
+if [ -n "${project_path}" ]; then
+  version_file="${project_path%/}/ProjectSettings/ProjectVersion.txt"
 fi
-version_file="${project_path%/}/ProjectSettings/ProjectVersion.txt"
-unity_version=
 if [ -e "${version_file}" ]; then
   eval $(parse_yaml "${version_file}")
   unity_version=${m_EditorVersion}
@@ -87,29 +85,17 @@ unity="${unity_install_dir%/}/${unity_version}/${unity_bin_path}"
 "${unity}" "${unity_params[@]}" &
 unity_pid=$!
 
-tail_pid=0
 if [ ${log_stdout} -eq 1 -a -n "${log_file}" ]; then
-  # 一時ファイルに書き込まれたログをtailで出力
-  tail -F "${log_file}" 2>/dev/null &
-  tail_pid=$!
+  (
+    while [ ! -s "${log_file}" ]; do
+      if ! ps -p ${unity_pid} >/dev/null 2>&1; then
+        break
+      fi
+      sleep 0.5
+    done
+    tail --pid ${unity_pid} --sleep-interval=0.5 -n +0 -F "${log_file}" 2>/dev/null
+  ) &
+  trap "sleep 1; rm -f '${log_file}' >/dev/null 2>&1 | cat" EXIT
 fi
 
-set +e
 wait ${unity_pid}
-rc=$?
-set -e
-if [ ${tail_pid} -ne 0 ]; then
-  sleep 1
-  kill ${tail_pid}
-  retry=3
-  while :; do
-    rm -f "${log_file}" | cat >/dev/null 2>&1
-    if [ ! -e "${log_file}" -o $retry -le 0 ]; then
-      break
-    fi
-    sleep 1
-    retry=$((retry - 1))
-  done
-fi >/dev/null 2>&1
-
-exit $rc
