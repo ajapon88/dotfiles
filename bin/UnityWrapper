@@ -18,18 +18,28 @@ function parse_yaml() {
    }'
 }
 
+platform=
 if [ "$(uname)" == 'Darwin' ]; then
   platform="osx"
-  unity_install_dir="/Applications/Unity/Hub/Editor"
-  unity_bin_path="Unity.app/Contents/MacOS/Unity"
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' -o "$(expr substr $(uname -s) 1 10)" == 'MINGW64_NT' ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" == 'MINGW' -o "$(expr substr $(uname -s) 1 7)" == 'MSYS_NT' ]; then
   platform="win"
-  unity_install_dir="/c/Program Files/Unity/Hub/Editor"
-  unity_bin_path="Editor/Unity.exe"
 else
   echo "Your platform ($(uname -a)) is not supported." 1>&2
   exit 1
 fi
+
+unity_install_dir=
+unity_bin_path=
+case "${platform}" in
+  "osx")
+    unity_install_dir="/Applications/Unity/Hub/Editor"
+    unity_bin_path="Unity.app/Contents/MacOS/Unity"
+    ;;
+  "win")
+    unity_install_dir="/c/Program Files/Unity/Hub/Editor"
+    unity_bin_path="Editor/Unity.exe"
+    ;;
+esac
 if [ -n "${UNITY_INSTALL_DIR}" ]; then
   unity_install_dir=${UNITY_INSTALL_DIR}
 fi
@@ -81,21 +91,23 @@ else
 fi
 
 unity="${unity_install_dir%/}/${unity_version}/${unity_bin_path}"
-
-"${unity}" "${unity_params[@]}" &
-unity_pid=$!
+if [ ! -e "${unity}" ]; then
+  echo "no install unity version=${unity_version}" 1>&2
+  exit 1
+fi
 
 if [ ${log_stdout} -eq 1 -a -n "${log_file}" ]; then
   (
+    # unityのログ書き込みより前にtailすると環境によってエラーになるので書き込みを待つ
     while [ ! -s "${log_file}" ]; do
-      if ! ps -p ${unity_pid} >/dev/null 2>&1; then
+      if ! ps -p $$ >/dev/null 2>&1; then
         break
       fi
       sleep 0.5
     done
-    tail --pid ${unity_pid} --sleep-interval=0.5 -n +0 -F "${log_file}" 2>/dev/null
+    tail --pid $$ --sleep-interval=0.5 -n +0 -f "${log_file}"
   ) &
   trap "sleep 1; rm -f '${log_file}' >/dev/null 2>&1 | cat" EXIT
 fi
 
-wait ${unity_pid}
+"${unity}" "${unity_params[@]}"
