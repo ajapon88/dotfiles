@@ -41,12 +41,14 @@ if [ -f virtualenvwrapper.sh ]; then
 fi
 
 # go
-export GOPATH=~/go
+goenv=${HOME}/.goenv/bin
+if [ -d "${goenv}" ]; then export PATH=${goenv}:${PATH}; fi
+if which goenv >/dev/null 2>&1; then
+  eval "$(goenv init -)";
+else
+  export GOPATH=~/go
+fi
 export PATH=${GOPATH}/bin:${PATH}
-
-# goenv
-export PATH=${HOME}/.goenv/bin:${PATH}
-if which goenv >/dev/null 2>&1; then eval "$(goenv init -)"; fi
 
 # direnv
 if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
