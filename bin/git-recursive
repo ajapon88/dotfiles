@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function git_recursive() {
+  pushd "${1}" >/dev/null
+  shift
+  if [ -d ".git" ]; then
+    git rev-parse --resolve-git-dir .git >/dev/null
+    if [ $? -eq 0 ]; then
+      echo "> $(pwd)"
+      git "${@}"
+    fi
+  fi
+  for file in *; do
+    if [ -d "${file}" ]; then
+      git_recursive "${file}" "${@}"
+    fi
+  done
+  popd >/dev/null
+}
+
+git_recursive . "${@}"
