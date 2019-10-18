@@ -36,15 +36,15 @@ if which rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 export PYTHONUSERBASE=${HOME}/.local
 export PATH=${PATH}:${PYTHONUSERBASE}/bin
 if [ -f virtualenvwrapper.sh ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source virtualenvwrapper.sh
+  export WORKON_HOME=$HOME/.virtualenvs
+  source virtualenvwrapper.sh
 fi
 
 # go
 goenv=${HOME}/.goenv/bin
 if [ -d "${goenv}" ]; then export PATH=${goenv}:${PATH}; fi
 if which goenv >/dev/null 2>&1; then
-  eval "$(goenv init -)";
+  eval "$(goenv init -)"
 else
   export GOPATH=~/go
 fi
@@ -61,6 +61,26 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
+
+# android
+if [ -z "${ANDROID_HOME}" ]; then
+  if [ -d "${HOME}/Library/Android/sdk" ]; then
+    export ANDROID_HOME="${HOME}/Library/Android/sdk"
+  elif [ -d "/Applications/android-sdk" ]; then
+    export ANDROID_HOME="/Applications/android-sdk"
+  elif [ -d "${HOME}/AppData/Local/Android/Sdk" ]; then
+    export ANDROID_HOME="${HOME}/AppData/Local/Android/Sdk"
+  fi
+fi
+
+alias android-tools='echo "${ANDROID_HOME}/tools"'
+alias android='$(android-tools)/android'
+
+alias android-platform-tools='echo "${ANDROID_HOME}/platform-tools"'
+alias adb='$(android-platform-tools)/adb'
+
+alias android-build-tools='echo "${ANDROID_HOME}/build-tools/$(ls -1 ${ANDROID_HOME}/build-tools | sort -rn | head -1)"'
+alias aapt='$(android-build-tools)/aapt'
 
 [ -e ~/.bashrc.os ] && source ~/.bashrc.os
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
