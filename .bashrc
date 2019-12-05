@@ -39,6 +39,10 @@ if [ -f virtualenvwrapper.sh ]; then
   export WORKON_HOME=$HOME/.virtualenvs
   source virtualenvwrapper.sh
 fi
+# pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/shims:$PATH"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # go
 goenv=${HOME}/.goenv/bin
@@ -60,6 +64,7 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 # ghq
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias gd='cd $(ghq root)'
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
 
 # android
