@@ -42,7 +42,7 @@ fi
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/shims:$PATH"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # go
 goenv=${HOME}/.goenv/bin
