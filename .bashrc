@@ -62,8 +62,8 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 
 # ghq
-alias g='cd $(ghq root)/$(ghq list | peco)'
-alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias g='cd $(ghq root)/$(ghq list | sort | peco)'
+alias gh='hub browse $(ghq list | sort | peco | cut -d "/" -f 2,3)'
 alias gd='cd $(ghq root)'
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
 
