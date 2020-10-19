@@ -17,10 +17,18 @@ set log-view    = line-number:yes,interval=1 text
 set blob-view   = line-number:yes,interval=1 text
 set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
 
+# checkout
+bind main    =      ?git checkout %(branch)
+bind refs    =      ?git checkout %(branch)
+bind main    <Esc>= ?git checkout %(commit)
+
 # checkout -b
 bind main    B      !git checkout -b "%(prompt Enter branch name: )" %(branch)
 bind refs    B      !git checkout -b "%(prompt Enter branch name: )" %(branch)
 bind main    <Esc>b !git checkout -b "%(prompt Enter branch name: )" %(commit)
+
+# checkout -
+bind generic -      ?git checkout -
 
 # fetch
 bind generic F      >git fetch -p %(remote)
