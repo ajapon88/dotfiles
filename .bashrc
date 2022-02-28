@@ -25,6 +25,8 @@ if which colorsvn >/dev/null 2>&1; then alias svn='colorsvn'; fi
 # export GIT_TRACE=1
 # export GIT_CURL_VERBOSE=1
 GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM=auto
 export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\\$ '
 [ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
 
