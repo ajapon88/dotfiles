@@ -21,14 +21,16 @@ else
   exit 1
 fi
 
-for file in .vimrc .vim .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc; do
+for file in .vimrc .vim .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc; do
   ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
 done
 ln -visnf "${DOTFILES_PATH}/.gitconfig.${OS_SUFFIX}" "${HOME}/.gitconfig.os"
 ln -visnf "${DOTFILES_PATH}/.bashrc.${OS_SUFFIX}" "${HOME}/.bashrc.os"
+ln -visnf "${DOTFILES_PATH}/.zshrc.${OS_SUFFIX}" "${HOME}/.zshrc.os"
 
 [ ! -e "${HOME}/.gitconfig.local" ] && touch "${HOME}/.gitconfig.local"
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
+[ ! -e "${HOME}/.zshrc.local" ] && touch "${HOME}/.zshrc.local"
 
 [ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
 if [ -d "${DOTFILES_PATH}/.config" ]; then
@@ -48,8 +50,8 @@ case "${OS}" in
 'Mac')
   # homebrew
   [ ! $(which brew) ] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  [ ! $(which ansible-playbook) ] && brew install ansible
-  bash -lc 'ansible-playbook -i ansible/hosts ansible/playbook.yml'
+  # bash -lc 'ansible-playbook -i ansible/hosts ansible/playbook.yml'
+  brew bundle
   ;;
 'Linux') ;;
 'Windows') ;;
