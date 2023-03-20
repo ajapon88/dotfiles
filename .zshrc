@@ -5,6 +5,9 @@ setopt LIST_BEEP
 setopt HIST_BEEP
 setopt NO_BEEP
 
+# bindkey
+bindkey -e  # emacs
+
 # reload
 alias reload='source ~/.zshrc'
 alias relogin='exec $SHELL -l'
