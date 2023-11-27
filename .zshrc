@@ -67,7 +67,7 @@ fi
 export PATH=${GOPATH}/bin:${PATH}
 
 # direnv
-if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
+if which direnv >/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
@@ -88,16 +88,17 @@ if [ -z "${ANDROID_HOME}" ]; then
   elif [ -d "${HOME}/AppData/Local/Android/Sdk" ]; then
     export ANDROID_HOME="${HOME}/AppData/Local/Android/Sdk"
   fi
+
+  alias android-tools='echo "${ANDROID_HOME}/tools"'
+  alias android='$(android-tools)/android'
+  
+  alias android-platform-tools='echo "${ANDROID_HOME}/platform-tools"'
+  alias adb='$(android-platform-tools)/adb'
+  
+  alias android-build-tools='echo "${ANDROID_HOME}/build-tools/$(ls -1 ${ANDROID_HOME}/build-tools | sort -rn | head -1)"'
+  alias aapt='$(android-build-tools)/aapt'
 fi
 
-alias android-tools='echo "${ANDROID_HOME}/tools"'
-alias android='$(android-tools)/android'
 
-alias android-platform-tools='echo "${ANDROID_HOME}/platform-tools"'
-alias adb='$(android-platform-tools)/adb'
-
-alias android-build-tools='echo "${ANDROID_HOME}/build-tools/$(ls -1 ${ANDROID_HOME}/build-tools | sort -rn | head -1)"'
-alias aapt='$(android-build-tools)/aapt'
-
-[ -e ~/.bashrc.os ] && source ~/.zshrc.os
-[ -e ~/.bashrc.local ] && source ~/.zshrc.local
+[ -e ~/.zshrc.os ] && source ~/.zshrc.os
+[ -e ~/.zshrc.local ] && source ~/.zshrc.local

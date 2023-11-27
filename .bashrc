@@ -78,16 +78,16 @@ if [ -z "${ANDROID_HOME}" ]; then
   elif [ -d "${HOME}/AppData/Local/Android/Sdk" ]; then
     export ANDROID_HOME="${HOME}/AppData/Local/Android/Sdk"
   fi
+
+  alias android-tools='echo "${ANDROID_HOME}/tools"'
+  alias android='$(android-tools)/android'
+  
+  alias android-platform-tools='echo "${ANDROID_HOME}/platform-tools"'
+  alias adb='$(android-platform-tools)/adb'
+  
+  alias android-build-tools='echo "${ANDROID_HOME}/build-tools/$(ls -1 ${ANDROID_HOME}/build-tools | sort -rn | head -1)"'
+  alias aapt='$(android-build-tools)/aapt'
 fi
-
-alias android-tools='echo "${ANDROID_HOME}/tools"'
-alias android='$(android-tools)/android'
-
-alias android-platform-tools='echo "${ANDROID_HOME}/platform-tools"'
-alias adb='$(android-platform-tools)/adb'
-
-alias android-build-tools='echo "${ANDROID_HOME}/build-tools/$(ls -1 ${ANDROID_HOME}/build-tools | sort -rn | head -1)"'
-alias aapt='$(android-build-tools)/aapt'
 
 [ -e ~/.bashrc.os ] && source ~/.bashrc.os
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local
