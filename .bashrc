@@ -14,7 +14,7 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(__git_ps1)\[\
 [ -f "${HOME}/bin/opt/ghq-init.bash" ] && source "${HOME}/bin/opt/ghq-init.bash"
 
 # direnv
-if which direnv >/dev/null 2>&1; then eval "$(direnv hook 
+if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
 [ -e ~/.bashrc.os ] && source ~/.bashrc.os
-[ -e ~/.zsbashrchrc.local ] && source ~/.bashrc.local
+[ -e ~/.bashrc.local ] && source ~/.bashrc.local
