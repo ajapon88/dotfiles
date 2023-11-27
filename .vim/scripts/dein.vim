@@ -19,7 +19,7 @@ if dein#load_state(s:dein_dir)
 
   " Let dein manage dein
   " Required:
-  call dein#add('Shougo/dein.vim')
+  " call dein#add('Shougo/dein.vim')
 
   let g:config_dir  = expand('~/.vim/dein/config')
   let s:toml        = g:config_dir . '/plugins.toml'
