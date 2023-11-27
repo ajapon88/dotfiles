@@ -24,4 +24,4 @@ if which brew >/dev/null 2>&1; then
   export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
 fi
 
-export HOMEBREW_GITHUB_API_TOKEN=
+# export HOMEBREW_GITHUB_API_TOKEN=
