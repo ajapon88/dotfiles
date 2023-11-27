@@ -97,3 +97,6 @@ bind grep    <Esc>; @hub browse -- blob/"%(prompt Enter branch name: )"/%(file)
 bind main    w      @hub browse -- pull/%(branch)
 bind diff    w      @hub browse -- pull/%(branch)
 bind refs    w      @hub browse -- pull/%(branch)
+
+bind status <Esc>t  ?git checkout --theirs %(file)
+bind status <Esc>o  ?git checkout --ours %(file)
