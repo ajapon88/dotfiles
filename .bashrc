@@ -1,5 +1,8 @@
 export PATH=$PATH:${HOME}/bin
 
+[ -e ~/.env ] && source ~/.env
+[ -e ~/.env.local ] && source ~/.env.local
+
 # reload
 alias reload='source ~/.bash_profile'
 alias relogin='exec $SHELL -l'

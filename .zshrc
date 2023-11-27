@@ -8,6 +8,9 @@ setopt NO_BEEP
 # bindkey
 bindkey -e  # emacs
 
+[ -e ~/.env ] && source ~/.env
+[ -e ~/.env.local ] && source ~/.env.local
+
 # reload
 alias reload='source ~/.zshrc'
 alias relogin='exec $SHELL -l'

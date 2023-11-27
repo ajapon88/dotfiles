@@ -21,15 +21,19 @@ else
   exit 1
 fi
 
-for file in .vimrc .vim .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc; do
+for file in .vimrc .vim .env .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc; do
   ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
 done
-ln -visnf "${DOTFILES_PATH}/.gitconfig.${OS_SUFFIX}" "${HOME}/.gitconfig.os"
-ln -visnf "${DOTFILES_PATH}/.bashrc.${OS_SUFFIX}" "${HOME}/.bashrc.os"
-ln -visnf "${DOTFILES_PATH}/.zshrc.${OS_SUFFIX}" "${HOME}/.zshrc.os"
 
+[ ! -e "${HOME}/.env.local" ] && touch "${HOME}/.env.local"
+
+ln -visnf "${DOTFILES_PATH}/.gitconfig.${OS_SUFFIX}" "${HOME}/.gitconfig.os"
 [ ! -e "${HOME}/.gitconfig.local" ] && touch "${HOME}/.gitconfig.local"
+
+ln -visnf "${DOTFILES_PATH}/.bashrc.${OS_SUFFIX}" "${HOME}/.bashrc.os"
 [ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
+
+ln -visnf "${DOTFILES_PATH}/.zshrc.${OS_SUFFIX}" "${HOME}/.zshrc.os"
 [ ! -e "${HOME}/.zshrc.local" ] && touch "${HOME}/.zshrc.local"
 
 [ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
