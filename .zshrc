@@ -16,7 +16,18 @@ alias reload='source ~/.zshrc'
 
 # git
 setopt PROMPT_SUBST
-export PROMPT='%F{green}%m%f:%F{cyan}%c%f%F{red}% $(__git_ps1)%f$ '
+# https://redj.hatenablog.com/entry/2022/04/24/003944
+get_git_info_for_ps1() {
+  local GIT_INFO=$(__git_ps1 "%s")
+  if [ -n "$GIT_INFO" ]; then
+    local GIT_USER_NAME=$(git config --get user.name)
+    if [ -z "$GIT_USER_NAME" ]; then
+      GIT_USER_NAME="NO-USER-NAME"
+    fi
+    echo " ($GIT_USER_NAME@$GIT_INFO)"
+  fi
+}
+export PROMPT='%F{green}%m%f:%F{cyan}%c%f%F{red}% $(get_git_info_for_ps1)%f$ '
 [ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
 
 # ghq
