@@ -1,11 +1,11 @@
 [http]
 	postBuffer = 524288000
 [core]
-    precomposeunicode = true
-    quotepath = false
-    excludesfile = ~/.gitignore_global
-    editor = vim -c \"set fenc=utf-8\"
-    symlinks = true
+	precomposeunicode = true
+	quotepath = false
+	excludesfile = ~/.gitignore_global
+	editor = vim -c \"set fenc=utf-8\"
+	symlinks = true
 [push]
 	default = current
 [pack]
@@ -19,22 +19,24 @@
 	name = 
 	email = 
 [alias]
-    alias = "!f(){ git config --get-regexp alias|cut -d'.' -f2|if [ -z $1 ];then cut -d' ' -f1|column; else grep $1' '; fi }; f"
-    showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...HEAD | grep 'Merge pull request #' | head -n 1; }; f"
-    repo = "!f() { git config --get remote.origin.url | sed -e \"s/^.*[:\\/]\\(.*\\/.*\\).git$/https:\\/\\/github.com\\/\\1/\"; }; f"
-    local = symbolic-ref --short HEAD
-    assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --assume-unchanged; }; f"
-    no-assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --no-assume-unchanged; }; f"
-    ignored = !git ls-files -v | grep "^[[:lower:]]"
-    change-autocrlf = "!f(){ git config --local core.autocrlf "\"${1}\""; find "$(pwd)/$(git rev-parse --show-cdup)" -print0 | xargs -0 touch; }; f"
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    authors = !"git log --pretty=format:%an | sort | uniq"
-    commiters = !"git log --pretty=format:%cn | sort | uniq"
-    root = "!exec $SHELL ; :"
-    propen = "!hub browse -- \"pull/$(git symbolic-ref --short HEAD)\""
-    bropen = "!hub browse -- \"tree/$(git symbolic-ref --short HEAD)\""
-[include]
-    path = .gitconfig.os
-    path = .gitconfig.local
+	alias = "!f(){ git config --get-regexp alias|cut -d'.' -f2|if [ -z $1 ];then cut -d' ' -f1|column; else grep $1' '; fi }; f"
+	showpr = "!f() { git log --merges --oneline --reverse --ancestry-path $1...HEAD | grep 'Merge pull request #' | head -n 1; }; f"
+	repo = "!f() { git config --get remote.origin.url | sed -e \"s/^.*[:\\/]\\(.*\\/.*\\).git$/https:\\/\\/github.com\\/\\1/\"; }; f"
+	local = symbolic-ref --short HEAD
+	assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --assume-unchanged; }; f"
+	no-assume-unchanged-dir = "!f(){ [ "\"${GIT_PREFIX}\"" != "\"\"" ] && cd "\"${GIT_PREFIX}\""; git ls-files -z "\"${1}\"" | xargs -0 git update-index --no-assume-unchanged; }; f"
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
+	change-autocrlf = "!f(){ git config --local core.autocrlf "\"${1}\""; find "$(pwd)/$(git rev-parse --show-cdup)" -print0 | xargs -0 touch; }; f"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	authors = !"git log --pretty=format:%an | sort | uniq"
+	commiters = !"git log --pretty=format:%cn | sort | uniq"
+	root = "!exec $SHELL ; :"
+	propen = "!hub browse -- \"pull/$(git symbolic-ref --short HEAD)\""
+	bropen = "!hub browse -- \"tree/$(git symbolic-ref --short HEAD)\""
+[credential]
+	helper = manager
 [ghq]
 	root = ~/repos
+[include]
+	path = ~/.gitconfig.os
+	path = ~/.gitconfig.local
