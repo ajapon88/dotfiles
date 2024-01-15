@@ -2,6 +2,9 @@ alias dns-clean='sudo killall -HUP mDNSResponder'
 alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
 alias vim='mvim -v'
 
+alias play-blow='afplay /System/Library/Sounds/Blow.aiff'
+alias beep='say Beep'
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if type brew &>/dev/null; then
