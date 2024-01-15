@@ -33,8 +33,6 @@
 	root = "!exec $SHELL ; :"
 	propen = "!hub browse -- \"pull/$(git symbolic-ref --short HEAD)\""
 	bropen = "!hub browse -- \"tree/$(git symbolic-ref --short HEAD)\""
-[credential]
-	helper = manager
 [ghq]
 	root = ~/repos
 [include]
