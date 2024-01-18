@@ -53,7 +53,7 @@ fi
 case "${OS}" in
 'Mac')
   # homebrew
-  [ ! $(which brew) ] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  [ ! $(which brew) ] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   # bash -lc 'ansible-playbook -i ansible/hosts ansible/playbook.yml'
   brew bundle
   ;;
