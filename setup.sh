@@ -21,7 +21,7 @@ else
   exit 1
 fi
 
-for file in .vimrc .vim .env .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc; do
+for file in .vimrc .vim .env .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc .inputrc; do
   ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
 done
 
