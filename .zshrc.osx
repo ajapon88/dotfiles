@@ -25,6 +25,10 @@ if which brew >/dev/null 2>&1; then
   done
 
   export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
+
+  # asdf
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+  . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 
 # export HOMEBREW_GITHUB_API_TOKEN=

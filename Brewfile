@@ -1,7 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-versions"
 tap "universal-ctags/universal-ctags"
-brew "anyenv"
+brew "asdf"
 brew "zstd"
 brew "bash-completion"
 brew "cmake"
