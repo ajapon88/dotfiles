@@ -62,3 +62,6 @@ GTAGS
 .vim/tmp/*
 .vim/bundle
 !.gitkeep
+
+
+ Brewfile.lock.json
