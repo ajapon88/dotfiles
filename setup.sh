@@ -22,7 +22,7 @@ else
 fi
 
 # directory
-for dir in .vim .config bin; do
+for dir in .vim bin; do
   ln -visnf "${DOTFILES_PATH}/${dir}" "${HOME}/${dir}"
 done
 
@@ -37,6 +37,14 @@ for file in .env .bashrc .zshrc .gitconfig; do
   [ -e "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" ] && ln -visnf "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" "${HOME}/${file}.os"
   [ ! -e "${HOME}/${file}.local" ] && touch "${HOME}/${file}.local"
 done
+
+# config
+[ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
+if [ -d "${DOTFILES_PATH}/.config" ]; then
+  for file in $(ls .config); do
+    ln -visnf "${DOTFILES_PATH}/.config/${file}" "${HOME}/.config/${file}"
+  done
+fi
 
 case "${OS}" in
 'Mac')
