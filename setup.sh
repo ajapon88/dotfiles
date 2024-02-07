@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -eu
 
 export DOTFILES_PATH=$(
   cd $(dirname "${0}")
@@ -21,34 +21,22 @@ else
   exit 1
 fi
 
-for file in .vimrc .vim .env .zshrc .zprofile .bashrc .bash_profile .gitconfig .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc .inputrc .asdfrc; do
+# directory
+for dir in .vim .config bin; do
+  ln -visnf "${DOTFILES_PATH}/${dir}" "${HOME}/${dir}"
+done
+
+# dotfiles
+for file in .vimrc .zprofile .bash_profile .gitignore_global .screenrc .tmux.conf .tigrc .direnvrc .inputrc .asdfrc; do
   ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
 done
 
-[ ! -e "${HOME}/.env.local" ] && touch "${HOME}/.env.local"
-
-ln -visnf "${DOTFILES_PATH}/.gitconfig.${OS_SUFFIX}" "${HOME}/.gitconfig.os"
-[ ! -e "${HOME}/.gitconfig.local" ] && touch "${HOME}/.gitconfig.local"
-
-ln -visnf "${DOTFILES_PATH}/.bashrc.${OS_SUFFIX}" "${HOME}/.bashrc.os"
-[ ! -e "${HOME}/.bashrc.local" ] && touch "${HOME}/.bashrc.local"
-
-ln -visnf "${DOTFILES_PATH}/.zshrc.${OS_SUFFIX}" "${HOME}/.zshrc.os"
-[ ! -e "${HOME}/.zshrc.local" ] && touch "${HOME}/.zshrc.local"
-
-[ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
-if [ -d "${DOTFILES_PATH}/.config" ]; then
-  for file in $(ls .config); do
-    ln -visnf "${DOTFILES_PATH}/.config/${file}" "${HOME}/.config/${file}"
-  done
-fi
-
-[ ! -e "${HOME}/bin" ] && mkdir "${HOME}/bin"
-if [ -d "${DOTFILES_PATH}/bin" ]; then
-  for file in $(ls bin); do
-    ln -visnf "${DOTFILES_PATH}/bin/${file}" "${HOME}/bin/${file}"
-  done
-fi
+# dotfiles environment
+for file in .env .bashrc .zshrc .gitconfig; do
+  ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
+  [ -e "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" ] && ln -visnf "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" "${HOME}/${file}.os"
+  [ ! -e "${HOME}/${file}.local" ] && touch "${HOME}/${file}.local"
+done
 
 case "${OS}" in
 'Mac')
