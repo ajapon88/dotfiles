@@ -1,0 +1,9 @@
+#!/bin/bash -eu
+
+name=$1
+echo "> asdf plugin add ${name}"
+asdf plugin add ${name}
+echo "> asdf install ${name} latest"
+asdf install ${name} latest
+echo "> asdf global ${name} latest"
+asdf global ${name} latest
