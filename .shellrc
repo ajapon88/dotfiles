@@ -45,3 +45,6 @@ function g {
     cd "${d}"
   fi
 }
+
+[ -e ~/.shellrc.os ] && source ~/.shellrc.os
+[ -e ~/.shellrc.local ] && source ~/.shellrc.local

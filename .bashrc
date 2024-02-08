@@ -1,7 +1,6 @@
 export PATH=$PATH:${HOME}/bin
 
-[ -e ~/.env ] && source ~/.env
-[ -e ~/.env.local ] && source ~/.env.local
+[ -e ~/.shellrc ] && source ~/.shellrc
 
 # reload
 alias reload='source ~/.bash_profile'

@@ -32,7 +32,7 @@ for file in .vimrc .zprofile .bash_profile .gitignore_global .screenrc .tmux.con
 done
 
 # dotfiles environment
-for file in .env .bashrc .zshrc .gitconfig; do
+for file in .shellrc .bashrc .zshrc .gitconfig; do
   ln -visnf "${DOTFILES_PATH}/${file}" "${HOME}/${file}"
   [ -e "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" ] && ln -visnf "${DOTFILES_PATH}/${file}.${OS_SUFFIX}" "${HOME}/${file}.os"
   [ ! -e "${HOME}/${file}.local" ] && touch "${HOME}/${file}.local"
