@@ -1,8 +1,0 @@
-export MSYS=winsymlinks:nativestrict
-
-function opencmd()
-{
-    cmd 2>&1 | start $1 &
-}
-
-alias open='opencmd'
