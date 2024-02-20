@@ -1,0 +1,5 @@
+alias dns-clean='sudo killall -HUP mDNSResponder'
+alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
+alias vim='mvim -v'
+
+alias beep='say Beep'

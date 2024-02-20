@@ -1,7 +1,3 @@
-alias dns-clean='sudo killall -HUP mDNSResponder'
-alias rm-dsstores='find . -name ".DS_Store" -print -exec rm -f {} \;'
-alias vim='mvim -v'
-
 if which brew >/dev/null 2>&1; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
@@ -11,5 +7,4 @@ if which brew >/dev/null 2>&1; then
     [ -f "${file_path}" ] && source "${file_path}"
   done
 fi
-export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
 # export HOMEBREW_GITHUB_API_TOKEN=
