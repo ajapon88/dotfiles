@@ -1,0 +1,42 @@
+function isWsl {
+    case $(uname -r)/ in
+    *microsoft*) return $(true) ;;
+    *) return $(false) ;;
+    esac
+}
+
+if [ isWsl ]; then
+    # https://nnao45.hatenadiary.com/entry/2021/02/12/134852
+    # checks to see if we are in a windows or linux dir
+    function isWinDir {
+        case $PWD/ in
+        /mnt/*) return $(true) ;;
+        *) return $(false) ;;
+        esac
+    }
+
+    # wrap the git command to either run windows git or linux
+    # && || による擬似三項演算子だとちょっと重い
+    function git { if isWinDir; then git.exe "$@"; else /usr/bin/git "$@"; fi; }
+    # WinDirの方がWSL2のtigだと動かなかった
+    # alias tig.exe="/mnt/c/Program\\ Files/Git/usr/bin/tig.exe"
+    function tig { if isWinDir; then tig.exe "$@"; else /usr/bin/tig "$@"; fi; }
+
+    # https://hrroct.hatenablog.com/entry/2022/10/12/152619
+    function open() {
+        path_name=$1
+        if [ $# -eq 0 ]; then
+            path_name="."
+        elif [ $# -gt 1 ]; then
+            echo "open: $* : Set only one directory or file path" 1>&2
+            return 1
+        fi
+
+        if [ -e "${path_name}" ]; then
+            cmd.exe /c start $(wslpath -w ${path_name}) 2>/dev/null
+        else
+            echo "open: ${path_name} : No such file or directoty" 1>&2
+            return 1
+        fi
+    }
+fi
