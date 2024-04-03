@@ -2,9 +2,12 @@
 
 function uninstall() {
     name=$1
+    current=$(cd $HOME && asdf current $name 2>/dev/null | tr -s ' ' ' ' | cut -d ' ' -f 2)
     for v in $(asdf list $name | sed -e 's#\*##g'); do
-        echo "> asdf uninstall $name $v"
-        asdf uninstall $name $v
+        if [ "$v" != "$current" ]; then
+            echo "> asdf uninstall $name $v"
+            asdf uninstall $name $v
+        fi
     done
 }
 
