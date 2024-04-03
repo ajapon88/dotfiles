@@ -1,9 +1,18 @@
 #!/bin/bash -eu
 
 name=$1
-echo "> asdf plugin add ${name}"
-asdf plugin add ${name}
-echo "> asdf install ${name} latest"
-asdf install ${name} latest
-echo "> asdf global ${name} latest"
-asdf global ${name} latest
+if [ "${name}" = "--all" ]; then
+    for p in $(asdf plugin list); do
+        echo "> asdf install ${p} latest"
+        asdf install "${p}" latest
+        echo "> asdf global ${p} latest"
+        asdf global ${p} latest
+    done
+else
+    echo "> asdf plugin add ${name}"
+    asdf plugin add ${name}
+    echo "> asdf install ${name} latest"
+    asdf install ${name} latest
+    echo "> asdf global ${name} latest"
+    asdf global ${name} latest
+fi
