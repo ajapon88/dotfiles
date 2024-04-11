@@ -1,4 +1,4 @@
-export PATH=$PATH:${HOME}/bin
+export PATH=$PATH:${HOME}/bin/local:${HOME}/bin
 
 # reload
 alias relogin='exec $SHELL -l'

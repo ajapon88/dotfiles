@@ -1,5 +1,3 @@
-export PATH=$PATH:${HOME}/bin
-
 [ -e ~/.shellrc ] && source ~/.shellrc
 
 # reload

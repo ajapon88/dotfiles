@@ -1,5 +1,3 @@
-export PATH=$PATH:${HOME}/bin
-
 # disable beep
 setopt LIST_BEEP
 setopt HIST_BEEP

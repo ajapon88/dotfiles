@@ -65,3 +65,6 @@ GTAGS
 
 
 Brewfile.lock.json
+
+# local
+/bin/local
