@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for d in $(ghq list -p); do
+  echo "> $d"
+  (cd $d && "${@}")
+done
