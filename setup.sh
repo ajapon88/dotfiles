@@ -22,7 +22,7 @@ else
 fi
 
 # directory
-for dir in .vim bin; do
+for dir in .vim bin .bundle; do
   ln -visnf "${DOTFILES_PATH}/${dir}" "${HOME}/${dir}"
 done
 
