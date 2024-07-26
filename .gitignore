@@ -66,5 +66,7 @@ GTAGS
 
 Brewfile.lock.json
 
+#bin
+/bin/.asdf-keep-versions
 # local
 /bin/local

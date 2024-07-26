@@ -1,15 +1,36 @@
 #!/bin/bash -eu
 
+if [ $# -ne 1 ]; then
+    echo "Usage: $(basename $0) <name>"
+    exit 1
+fi
+
 function uninstall() {
     name=$1
     current=$(cd $HOME && asdf current $name 2>/dev/null | tr -s ' ' ' ' | cut -d ' ' -f 2)
     for v in $(asdf list $name | sed -e 's#\*##g'); do
         if [ "$v" != "$current" ]; then
-            echo "> asdf uninstall $name $v"
-            asdf uninstall $name $v
+
+            if [ "$(echo $keep_versions | grep ";${name}:${v};")" ]; then
+                echo "skip uninstall version $name $v"
+            else
+                echo "> asdf uninstall $name $v"
+                asdf uninstall $name $v
+            fi
         fi
     done
 }
+
+keep_versions=";"
+
+SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+KEEP_VERSIONS_FILE=${SCRIPT_DIR}/.asdf-keep-versions
+if [ -e "${KEEP_VERSIONS_FILE}" ]; then
+    while read line; do
+        keep_versions+="${line};"
+    done <${KEEP_VERSIONS_FILE}
+fi
+
 
 if [ "${1}" = "--all" ]; then
     for p in $(asdf plugin list); do

@@ -1,5 +1,10 @@
 #!/bin/bash -eu
 
+if [ $# -ne 1 ]; then
+    echo "Usage: $(basename $0) <name>"
+    exit 1
+fi
+
 name=$1
 if [ "${name}" = "--all" ]; then
     for p in $(asdf plugin list); do
