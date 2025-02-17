@@ -24,5 +24,8 @@ export PS1='\[\033[32m\]\h\[\033[00m\]:\[\033[36m\]\W\[\033[31m\]$(get_git_info_
 # direnv
 if which direnv >/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
+# asdf
+if which asdf >/dev/null 2>&1; then . <(asdf completion bash); fi
+
 [ -e ~/.bashrc.os ] && source ~/.bashrc.os
 [ -e ~/.bashrc.local ] && source ~/.bashrc.local

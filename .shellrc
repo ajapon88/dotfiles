@@ -28,6 +28,9 @@ GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWUPSTREAM=auto
 
+# go
+if which go >/dev/null 2>&1; then export PATH="$(go env GOPATH)/bin:$PATH"; fi
+
 # ghq
 # alias g='cd $(ghq root)/$(ghq list | sort | peco)'
 alias gh='hub browse $(ghq list | sort | peco | cut -d "/" -f 2,3)'
