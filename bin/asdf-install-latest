@@ -1,23 +1,41 @@
-#!/bin/bash -eu
+#!/bin/bash -u
 
 if [ $# -ne 1 ]; then
     echo "Usage: $(basename $0) <name>"
     exit 1
 fi
 
+function install_latest() {
+    name=$1
+    echo "> asdf install ${name} latest"
+
+    version=$(asdf latest ${name})
+    if [ $? != 0 ]; then
+        echo $version # error message
+        return
+    fi
+    # install
+    if asdf list $name | sed -e s/\*//g | grep -q "^[ ]*${version}[ ]*$"; then
+        echo ${name} ${version} is already installed
+    else
+        echo "> asdf install ${name} ${version}"
+        asdf install "${name}" "${version}"
+    fi
+    # set global
+    current=$(cd $HOME && asdf current $name 2>/dev/null | sed 1d | tr -s ' ' ' ' | cut -d ' ' -f 2)
+    if [ "${current}" != "${version}" ]; then
+        echo "> asdf set ${name} ${version}"
+        asdf set "${name}" "${version}"
+    fi
+}
+
 name=$1
 if [ "${name}" = "--all" ]; then
     for p in $(asdf plugin list); do
-        echo "> asdf install ${p} latest"
-        asdf install "${p}" latest
-        echo "> asdf global ${p} latest"
-        asdf global ${p} latest
+        install_latest "${p}"
     done
 else
     echo "> asdf plugin add ${name}"
     asdf plugin add ${name}
-    echo "> asdf install ${name} latest"
-    asdf install ${name} latest
-    echo "> asdf global ${name} latest"
-    asdf global ${name} latest
+    install_latest "${name}"
 fi
