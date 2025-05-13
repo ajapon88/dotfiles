@@ -35,7 +35,10 @@ export GOBIN="${gobin:-${HOME}/go/bin}"
 export PATH="${GOBIN}:$PATH"
 
 # asdf
-if which asdf >/dev/null 2>&1; then export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"; fi
+if which asdf >/dev/null 2>&1; then
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fi
 
 # ghq
 # alias g='cd $(ghq root)/$(ghq list | sort | peco)'

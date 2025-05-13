@@ -32,6 +32,8 @@ export PROMPT='%F{green}%m%f:%F{cyan}%c%f%F{red}% $(get_git_info_for_ps1)%f$ '
 
 # direnv
 if which direnv >/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
+# asdf
+if which asdf >/dev/null 2>&1; then eval "$(asdf completion zsh)"; fi
 
 [ -e ~/.zshrc.os ] && source ~/.zshrc.os
 [ -e ~/.zshrc.local ] && source ~/.zshrc.local
