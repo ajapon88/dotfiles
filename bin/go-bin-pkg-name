@@ -1,0 +1,12 @@
+#!/bin/bash -eu
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $(basename $0) <name>"
+    exit 1
+fi
+
+name=$1
+# https://zenn.dev/kyoh86/articles/291618538dcf0d
+gobin="${GOBIN:-${GOPATH:+${GOPATH}/bin}}"
+gobin="${gobin:-${HOME}/go/bin}"
+echo "$(cd "${gobin}" && go version -m "${name}" | head -n2 | tail -n1 | awk '{print $2}')"
